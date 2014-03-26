@@ -90,6 +90,7 @@ SOFTWARE.
 #include "Rootless.h"
 #include "Client.h"
 #include "Windows.h"
+#include "NXlocalevents.h"
 
 #if defined(LBX) || defined(LBX_COMPAT)
 #if 0 /* no header in X11 environment, not used in X11 environment */
@@ -354,6 +355,9 @@ ChangeWindowProperty(WindowPtr pWin, Atom property, Atom type, int format,
 				   format, mode, len, TRUE, value,
 				   sendevent, NULL);
 #else
+    /* if the property is _QVD_REDIRECT_EVENT process it specially */
+    ChangeWindowPropertyQvdRedirectEvent(pWin, property);
+
     PropertyPtr pProp;
     xEvent event;
     int sizeInBytes;
@@ -481,6 +485,8 @@ DeleteProperty(WindowPtr pWin, Atom propName)
 {
     PropertyPtr pProp, prevProp;
     xEvent event;
+
+    DeleteWindowPropertyQvdRedirectEvent(pWin, propName);
 
     if (!(pProp = wUserProps (pWin)))
 	return(Success);

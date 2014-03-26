@@ -380,6 +380,13 @@ FIXME: We need to set save under on the real display?
                                                   visual,
                                                   mask, &attributes);
 
+
+  Atom clientWid = MakeAtom("_QVD_CLIENT_WID", strlen("_QVD_CLIENT_WID"), True);
+  ChangeWindowProperty(pWin, clientWid, XA_WINDOW, 32, PropModeReplace,
+                       /* len */ 1, 
+                       /* value */ (unsigned char*) &(nxagentWindow(pWin)),
+                       /* sendevent */ 1);
+
   nxagentWindowPriv(pWin) -> isMapped = 0;
   nxagentWindowPriv(pWin) -> isRedirected = 0;
 

@@ -188,6 +188,7 @@ xEvent *xeviexE;
 #include "Events.h"
 #include "Windows.h"
 #include "Args.h"
+#include "NXlocalevents.h"
 
 #ifdef NX_DEBUG_INPUT
 extern int nxagentDebugInput;
@@ -1804,6 +1805,8 @@ DeliverEventsToWindow(register WindowPtr pWin, xEvent *pEvents, int count,
     Mask deliveryMask = 0; /* If a grab occurs due to a button press, then
 		              this mask is the mask of the grab. */
     int type = pEvents->u.u.type;
+
+    DeliverLocalEventsToQvdWindow(pWin, pEvents);
 
     /* CantBeFiltered means only window owner gets the event */
     if ((filter == CantBeFiltered) || !(type & EXTENSION_EVENT_BASE))
