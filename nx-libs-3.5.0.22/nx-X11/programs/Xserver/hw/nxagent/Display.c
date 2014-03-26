@@ -77,7 +77,6 @@ is" without express or implied warranty.
 #include "NXlib.h"
 
 #include NXAGENT_ICON_NAME
-#include X2GOAGENT_ICON_NAME
 
 /*
  * Set here the required log level.
@@ -1942,29 +1941,12 @@ Bool nxagentMakeIcon(Display *display, Pixmap *nxIcon, Pixmap *nxMask)
   Bool success = False;
   XlibPixmap IconPixmap;
   XlibPixmap IconShape;
-  char* agent_icon_name;
-  char* agentIconData;
 
-  /*
-   * selecting x2go icon when running as X2Go agent
-   */
-  if(nxagentX2go)
-  {
-    agent_icon_name=X2GOAGENT_ICON_NAME;
-    agentIconData=x2goagentIconData;
-  }
-  else
-  {
-    agent_icon_name=NXAGENT_ICON_NAME;
-    agentIconData=nxagentIconData;
-  }
-
-
-  snprintf(default_path, PATH_MAX-1, "/usr/NX/share/images/%s", agent_icon_name);
+  snprintf(default_path, PATH_MAX-1, "/usr/NX/share/images/%s", NXAGENT_ICON_NAME);
 
   if ((icon_fp = fopen(default_path, "r")) == NULL)
   {
-    icon_fp = nxagentLookForIconFile(agent_icon_name, "r", icon_path);
+    icon_fp = nxagentLookForIconFile(NXAGENT_ICON_NAME, "r", icon_path);
 
     if (icon_fp != NULL)
     {
@@ -2003,7 +1985,7 @@ Bool nxagentMakeIcon(Display *display, Pixmap *nxIcon, Pixmap *nxMask)
   {
      status = XpmCreatePixmapFromData(display,
                                         DefaultRootWindow(display),
-                                        agentIconData,
+                                        nxagentIconData,
                                         &IconPixmap,
                                         &IconShape,
                                         NULL);
