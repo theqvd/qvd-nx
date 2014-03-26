@@ -1,0 +1,547 @@
+nx-libs (2:3.5.0.22-0x2go1) unstable; urgency=low
+
+  [ Mirraz Mirraz ]
+  * Add patch: 603_nx-X11_compilation_warnings.full.patch. Fix 3 evident bugs:
+    one implicit function declaration issue and two array index out of bounds
+    issues. (Fixes: #314).
+
+  [ Mike Gabriel ]
+  * Add patch 604_nx-X11_recent-freetype-API.full.patch. Fix FTBFS against
+    recent (>= 2.5.0) libfreetype6 API.
+  * Refresh patch: 600_nx-X11+nxcompext+nxcompshad_unique-libnames.full.patch.
+  * Improve patch:
+    601_nx-X11_build-option-changes-to-not-use-bundled-libraries.full.patch.
+    Improvements taken from the current Fedora package. Thanks to Orion
+    Paplowski!!! Also adapt roll-tarball.sh do dropping more bundled
+    libraries.
+  * Rename patch: 302_nxagent_configurable-keystrokes.full.patch to
+    320_nxagent_configurable-keystrokes.full.patch.
+  * debian/source/format:
+    + Switch to format 1.0.
+  * debian/control:
+    + Add libfreetype6-dev to Build-Depends: field.
+    + Drop symlinking libNX_xrandr for setting a custom LD_LIBRARY_PATH. Not in
+      use anymore and not recommended at all to have that.
+    + Make sure all nx-libs components depend on the very same version.
+  * debian/rules:
+    + Remove bundled libraries from source tree before building the package.
+  * nx-libs.spec:
+    + Ship nx-libs.spec (RPM package definitions) in upstream project. (Thanks
+      to the Fedora package maintainers). File differs from the Fedora file
+      already.
+    + Clear (Fedora package) changelog.
+    + Use local tarball, don't expect  ,,-full'' in tarball name.
+    + The RPM macro for the linker flags does not exist on EPEL. Thus, hardcode
+      __global_ldflags macro for EPEL builds.
+    + Enable Xinerama support for RPM packages. (Fixes: #370).
+
+  [ Clemens Lang ]
+  * Add patch 605_nxcomp_Types.h-dont-use-STL-internals-on-libc++.full.patch. Fix
+    FTBFS of nx-libs-lite on Mac OS X Mavericks. (Fixes: #337).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Sat, 04 Jan 2014 21:39:17 +0100
+
+nx-libs (2:3.5.0.21-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Provide a default keystrokes.cfg in /etc/nx (for nxagent) and /etc/x2go
+    (for x2goagent). (Fixes: #199).
+  * Use a keystrokes.cfg that reflects the normally hard-coded defaults of
+    a vanilla nxagent. (Fixes: #223).
+  * Set NXAGENT_KEYSTROKEFILE to /etc/x2go/keystrokes.cfg for wrapper x2goagent.
+  * For vanilla nxagent move keystrokes.cfg from /etc/nx to /etc/nxagent.
+  * Tarball roller script:
+    + Only install keystrokes.cfg when in full mode.
+    + Only install nxproxy wrapper when in lite mode.
+  * /debian/control:
+    + Add B-Ds: libfontconfig1-dev, libfontenc-dev.
+  * /debian/nx-libs-dev.install:
+    + Remove unrelated files from -dev package.
+  * Fix keystrokes.cfg, use Ctrl+Alt+<key> instead of just Ctrl+<key>. (Adds to
+    fixing #223).
+
+  [ Orion Poplawski ]
+  * Change build options so that bundled libraries are not used anymore at
+    build time. Remove bundled libraries from rolled tarballs, as well. (Fixes:
+    #238).
+  * Add patch: 602_nx-X11_initgroups.full.patch. Fix calling setuid and setgid
+    without setgroups or initgroups. There is a high probability this means it
+    didn't relinquish all groups, and this would be a potential security issue
+    to be fixed. Seek POS36-C on the web for details about the problem. (Fixes:
+    #293).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 30 Aug 2013 16:18:04 +0200
+
+nx-libs (2:3.5.0.20-0) unstable; urgency=low
+
+  * Fix faulty symlink path. Make sure that x2goagent symlink
+    does not point to absolute path somewhere within the build
+    environment. (Fixes: #156).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Thu, 28 Mar 2013 20:43:31 +0100
+
+nx-libs (2:3.5.0.19-0) unstable; urgency=low
+
+  * Add Jan's reasoning for using string_rep() instead of bash based
+    string substitutions as comment to /debian/Makefile.replaces.sh.
+  * Fix FTBFS for .deb packages after including fix for #145.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Thu, 28 Mar 2013 08:59:01 +0100
+
+nx-libs (2:3.5.0.18-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Remove duplicate install of nxproxy from main Makefile. Spotted by Jan
+    Engelhard.
+  * Work-in patch from Jan Engehardt for working around different
+    improper bash implementations of string-in-string replacing. (Fixes:
+    #145).
+  * Main Makefile: Use absolute symlink when linking from $(X2GOLIBDIR)
+    into $(NXLIBDIR) (i.e. linking x2goagent -> nxagent). (Fixes: #143).
+
+  [ Orion Poplawski ]
+  * Fix wrong symlink direction of libNX_* files. (Fixes: #107).
+  * Avoid building of libxcomp1 (which actually is identical to libxcomp3,
+    just with a wrong name). (Fixes: #104).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 22 Mar 2013 23:39:39 +0100
+
+nx-libs (2:3.5.0.17-0) unstable; urgency=low
+
+  [ Jan Engelhardt ]
+  * Fix /bin/Makefile. Add $(DESTDIR) to every install path.
+
+  [ Alexander Wuerstlein ]
+  * Add patch: 302_nxagent_configurable-keystrokes.full.patch, replaces the
+    hardcoded nxagent keybindings by a configurable table of keybindings.
+    (Fixes: #74).
+  * Follow-up commit for 302_nxagent_configurable-keystrokes.full.patch, fixes
+    FTBFS problem with the first version of that patch.
+
+  [ Mike Gabriel ]
+  * Add README.keystrokes to doc section of bin:package nxagent.
+  * Add libxml2-dev to build dependencies.
+  * Add pkg-config to build dependencies.
+  * Continue Reinhard's work on top-level install/uninstall. Esp.
+    integrate debian/post-nx-build.sh into main Makefile. Make
+    value of CONFIGURE variable traversable through the Makefile tree.
+
+  [ Orion Poplawski ]
+  * Add patches: 026_nxcomp*_honour-optflags.full*.patch. (Fixes: #84).
+
+  [ Reinhard Tartler ]
+  * Install debug symbols for all packages in a new binary package
+    'nx-x11-dbg'.
+  * Drop patch: 025_nxproxy_no-configure-file.full+lite.patch, instead remove
+    file nxproxy/configure from the source tree.
+  * Add roll-tarball.sh: replaces nx-tarballrelease script that could be
+    found in nx-buildscripts branch of nx-libs.git. Use this script to
+    create tarballs of nx-libs and nx-libs-lite.
+  * Fix installation of libxcompext, thanks to Orion Paplowski for spotting
+    this.
+  * /debian/rules:
+    + Integrate code from /debian/pre-build-nx.sh and drop the named file.
+    + Disable parallel build of .deb packages.
+  * /debian/control:
+    + Rely on shlibs instead of hardcoded dependencies.
+    + Drop xbitmaps from Build-Depends.
+    + Move xfonts-base over to Recommends.
+  * Update 031_nx-X11_parallel-make.full.patch. Add an explicit dependency
+    from the NX libX11.so to the nxcomp libraries. Unbreaks parallel builds.
+    (Fixes: #87).
+  * Fix and greatly enhance the top-level install and uninstall target for
+    plain makefile installs.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 04 Jan 2013 13:23:57 +0100
+
+nx-libs (2:3.5.0.16-0) unstable; urgency=low
+
+  * Fix installation of header files in Debian package.
+  * Fix patch file names concerning component nx-X11.
+  * Modify patch: 032_no-x11r6.full.patch. Install nx-X11 to /usr/local/lib/nx.
+  * Add patch: 032_no-x11r6.debian.patch. Use /usr/lib/nx for nx-X11 on Debian.
+  * Drop patch 032, fix other patches so that installation via make install
+    installs NX components to /usr/local/lib/nx and /usr/local/include/nx.
+  * Add patches: 024_fix-make-clean.full.patch,
+    024_fix-make-clean.full+lite.patch. Fix clean-up of build tree after
+    make build has run.
+  * Add patch: 025_nxproxy_no-configure-file.full+lite.patch. Remove
+    unneeded build file from NoMachine's nxproxy sources.
+  * Modify patch: 001_add-main-makefile.full+lite.patch. Install nx* and
+    x2goagent wrapper scripts during make install.
+  * Fix wrapper scripts: make sure all NX executables can be launched
+    if NX gets installed via the tarball installation method.
+  * Modify patch: 001_add-main-makefile.full+lite.patch. Add uninstall
+    routine.
+  * Dropping empty override rules for quilt patch from /debian/rules.
+  * Bump Debian Standards to 3.9.3 (no changes needed). Update Home page and
+    Vcs information.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Wed, 07 Nov 2012 21:07:49 +0100
+
+nx-libs (2:3.5.0.15-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Improve 020_add-nxagent-wrapper.full.patch: Properly set NX_TEMP, make
+    sure nxagent launches even with pam_tmpdir.so being in use.
+  * Improve 023_add-x2goagent-wrapper.full.patch: Properly set NX_TEMP, make
+    sure x2goagent launches even with pam_tmpdir.so being in use.
+  * Add VERSION.x2goagent to package x2goagent package so x2goversion command
+    lists up x2goagent in the list of X2Go server-side packages.
+  * Refresh patch: 200_nxagent_check-binary-x2go-flavour.full.patch.
+  * Make sure the NX_TEMP envvar gets set in all wrapper script for all nx*
+    execubles.
+  * Link libNX_Xrandr to a separate location where we can provide it as libXrandr.
+  * /debian/control:
+    + Maintainer change in package: X2Go Developers <x2go-dev@lists.berlios.de>.
+    + Priority: optional.
+  * Add patch: 220_nxproxy-bind-loopback-only.full+lite.patch, adds loopback
+    option to nxproxy options and forces nxproxy to bind to loopback devices
+    only.
+
+  [ Oleksandr Shneyder ]
+  * Add patch: 204-nxagent_repaint-solidpict.full.patch. Fixes repainting of
+    SolidFill pictures by nxagent/x2goagent on reconnects. (Fixes: #16).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 21 Sep 2012 10:02:16 +0200
+
+nx-libs (2:3.5.0.14-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * New upstream release of nxagent (3.5.0-9).
+  * Adapt patch series (all hunks succeeded automatically).
+  * Drop patch: 120_nxagent_libcairo-null-source-drawables.full.patch, the issue
+    has been fixed by NoMachine (TR05J02703).
+  * Drop patch: 109_nxagent_locale-utf8-compound-text.patch, the patch causes
+    Qt applications to be rendered without window decorations when running in
+    rootless window mode.
+
+  [ Mihai Moldovan ]
+  * Add patch: 052_nxcomp_macos10-nxauth-location.full+lite.patch, change
+    nxauth search location on Mac OS X to $NX_SYSTEM/nxauth to facilitate
+    application bundle building.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Thu, 28 Jun 2012 14:52:24 +0200
+
+nx-libs (2:3.5.0.13-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Let nxagent Debian package depend on xfonts-base.
+
+  [ Jim Burnes ]
+  * Add patch: 120_nxagent_libcairo-null-source-drawables.full.patch, solves
+    crashes of GTK applications based on libcairo 1.12.1+.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 11 May 2012 23:51:35 +0200
+
+nx-libs (2:3.5.0.12-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Update patch: 001_add-main-makefile.full+lite.patch, adapt patch from
+    packaging. Test for Makefiles in subfolders before calling them.
+    Fixes build failure during ,,make distclean'' calls.
+  * Provide temporary workaround for installation on Debian 64bit with
+    multiarch support (via libnx-x11.postinst and .prerm).
+  * Re-introduce proper Xinerama support on non-multiarch systems.
+
+  [ Mihai Moldovan ]
+  * Add patch: 051_nxcomp_macos105-fdisset.full+lite.patch, work around
+    issue in Mac OS X 10.5 SDK. Pass address of fd_set structs on the stack
+    to the FD_ISSET macro/function, instead of the struct itself.
+  * Update patch: 005_nxcomp_gcc43.full+lite.patch, fix faulty path to
+    nxcomp/Split.cpp.
+
+  [ Oleksandr Shneyder ]
+  * Add patch: 203_nxagent_disable-rootless-exit.full.patch, add command line
+    argument "-norootlessexit". Usually, nxagent exits after 30 seconds if
+    running in rootless mode and no X-Clients are present. Starting nxagent
+    with option "-norootlessexit" will change this behaviour.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Wed, 07 Mar 2012 20:50:14 +0100
+
+nx-libs (2:3.5.0.11-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Use ,,$(MAKE) -C'' in main Makefile for calling Makefiles in subdirectories,
+    make build stanza work for nx-libs-full and nx-libs-lite.
+  * Do not install libXinerama directly into /usr/lib/nx. Recommended method is
+    installing to /usr/lib/nx/Xinerama, so that you can enable/disable usage of
+    the Xinerama extension.
+  * Update patch: 001_add-main-makefile.full+lite.patch, use curly braces for
+    macros.
+  * Enable parallel build for Debian package.
+  * Merge honor-ac-dirs.patch from Jan Engelhardt (OpenSUSE) with already
+    existing Makefile patches (012_nxcomp..., 013_nxcompext_...,
+    014_nxcompshad_...).
+  * Rename patches 030_nx-X11_... and 031_nx-X11_..., the tarball roll script
+    currently requires ,,full'' or ,,full+lite'' in the file name.
+  * Make patch headers DEP5 compliant (030_nx-X11_... and 031_nx-X11_...).
+  * Update patch: 001_add-main-makefile.full+lite.patch, fix missing
+    $(CONFIGURE) variable.
+  * Update patches: 012_nxcomp..., 013_nxcompext_..., 014_nxcompshad_....
+    Also make use of $(LIBFULL) in Makefile.in's install and uninstall stanzas.
+    Inspired by Jan Engelhardt's so-version.diff patch. However, the version
+    name change requested in that patch has been rejected for
+    NX (redistributed).
+  * Apply patches for the Debian package as the last patches in the series.
+  * Fix faulty patch name suffix (has to be .patch, not .diff).
+  * Fix Xinerama support in Debian package libnx-x11 when NX gets built with
+    patch 600_nx-X11+nxcompext+nxcompshad_unique-libnames.full.patch. Still on
+    the todo list: fix the nx-X11 installation via Makefile.
+  * Fine-tune symlinking of libXinerama.
+
+  [ Jan Engelhardt ]
+  * Update patch: 001_add-main-makefile.full+lite.patch, allow passing of
+    configure args.
+  * Add patch: 030_nx-X11_configure-args.diff. Allow passing of configure args.
+  * Add patch: 031_nx-X11_parallel-make.diff, enable parallel make.
+  * Add patch: 301_nx-X11_use-shared-libs.full.diff, use shared libraries from
+    distribution rather then libs included in source tree.
+  * Add patch: 032_nx-X11_no-x11r6-project-root. We must not overlap with any
+    existing files, therefore, both /usr/X11R6 and /usr are excluded
+    possibilities for ProjectRoot. Use %_libexecdir/somename, since that is
+    still allowed by FHS.
+  * Add patch 600_nx-X11+nxcompext+nxcompshad_unique-libnames.full.patch, use
+    unique library names for nx-X11 based X11 libraries.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Wed, 22 Feb 2012 14:41:07 +0100
+
+nx-libs (2:3.5.0.10-0) unstable; urgency=low
+
+  * Add patch: 006_nxcomp_libpng15.full+lite.patch, fix build against
+    libpng 1.5.x.
+  * Reintroduce patch: 008_nxcomp_sa_restorer.full+lite.patch, now in a
+    version found on etersoft.ru, fixes build on ia64 architecture.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Tue, 07 Feb 2012 13:43:50 +0100
+
+nx-libs (2:3.5.0.9-0) unstable; urgency=low
+
+  [ Mike Gabriel ]
+  * Providing pending patches in source tree.
+
+  [ Oleksandr Shneyder ]
+  * Update patch: 202_nx-x11_enable-xinerama.full.patch, disable Xinerama
+    extension if NX_XINERAMA_CONF not exists.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Wed, 01 Feb 2012 14:39:57 +0100
+
+nx-libs (2:3.5.0.8-0) unstable; urgency=low
+
+  * Reorganize patch names, to reflect patch inclusion into lite+full or
+    full-only ,,NX (redistributed)'' tarball.
+  * Update patch: 001_add-main-makefile.full+lite.patch, only build, install,
+    clean etc. NX subprojects if the folder exists.
+  * Package x2goagent is an ,,all'' package, not ,,any''.
+  * Add folder /debian/patches-pending-evaluation with two newly discovered
+    patches from git.etersoft.ru (AltLinux packaging repository for NX).
+  * Fix patch: 109_nxagent_locale-utf8-compound-text.patch, fix crashes
+    reported from Stefan Baur. Thanks for reporting and testing!!!
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Sun, 22 Jan 2012 23:36:19 +0100
+
+nx-libs (2:3.5.0.7-0) unstable; urgency=low
+
+  * Drop patch: 011_nxcomp_sa-restorer.patch.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Mon, 16 Jan 2012 11:28:14 +0100
+
+nx-libs (2:3.5.0.6-0) unstable; urgency=low
+
+  * Add patch: 202_nx-x11_enable-xinerama.patch.
+  * Fix lintian issue: missing-separator-between-items for x2goagent package.
+    Drop dependency on libnx-x11 as we already depend on nxagent and fix
+    description synopsis of x2goagent package.
+  * Add patch header/copyright to: 202_nx-x11_enable-xinerama.patch.
+  * Silence lintian on debian-revision-should-not-be-zero. As this is no Debian
+    packaging repository, but ,,NX (redistributed)'', we will always release
+    with rev no. set to ,,0''.
+  * Install libXinerama into libnx-x11 package. Header files into
+    libnx-x11-dev.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 13 Jan 2012 13:21:41 +0100
+
+nx-libs (2:3.5.0.5-0) unstable; urgency=low
+
+  * Fix wrapper script patches for nxagent, x2goagent, nxauth, nxproxy.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Fri, 13 Jan 2012 00:37:21 +0100
+
+nx-libs (2:3.5.0.4-0) unstable; urgency=low
+
+  * Update/fix patch: 999_nxagent_unbrand-nxagent-brand-x2goagent.patch.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Thu, 12 Jan 2012 23:04:37 +0100
+
+nx-libs (2:3.5.0.3-0) unstable; urgency=low
+
+  * Rename nxagent-unbrand patch, so that is the last patch to be applied
+    (999_<patchname>).
+  * Drop NX agent unbrand patch from FreeNX.
+  * Add X2Go agent / NX agent flavouring via patch system:
+    - 200_nxagent_check-binary-x2go-flavour.patch
+    - 201_nxagent_set-x2go-icon-if-x2goagent-flavour.patch
+    - 300_nxagent_set-wm-class.patch
+    - 999_nxagent_unbrand-nxagent-brand-x2goagent.patch
+  * Add patch: 023_add-x2goagent-wrapper.patch.
+  * Add patch: 209_x2goagent-add-man-page.patch.
+  * Add binary package: x2goagent, includes man page
+    patch: 209_x2goagent-add-man-page.patch
+  * Modify patch: 101_nxagent_set-rgb-path.patch, add path to RGB file
+    if NX (redistributed) is installed via tarball under /usr/local.
+  * Provide patches that are tarball / distro aware. Either NX (redistributed)
+    has been installed to /usr/local/lib/nx via tarball or it has been
+    packaged for a distribution and is installed to /usr/lib/nx. Other
+    installation paths are currently not supported.
+  * Fix RGB color pallette (gray X2GO logo to be more accurate) for agent
+    splash screen.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Thu, 12 Jan 2012 13:04:03 +0100
+
+nx-libs (2:3.5.0.2-0) unstable; urgency=low
+
+  * Re-add binary wrapper scripts to the patch system as we
+    want to provide them in the tarball.
+  * Update folder name where applied patches end up in the tarball
+    release.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Tue, 10 Jan 2012 14:38:52 +0100
+
+nx-libs (2:3.5.0.1-0) unstable; urgency=low
+
+  * Increment version to stay in sync with client-only branch.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Tue, 10 Jan 2012 12:05:46 +0100
+
+nx-libs (2:3.5.0.0-0) unstable; urgency=low
+
+  * New upstream release of nxagent (3.5.0-7).
+  * Add lintian-overrides for every package. Override lintian warning:
+    possible-new-upstream-release-without-new-version as there will
+    be new upstream releases of NX subprojects that will not require
+    a version increment of the Debian package.
+  * Add individual watch files for NX components in this source package.
+  * Change naming scheme of patch files.
+  * Add man page for nxagent. Fix lintian warning: binary-without-manpage.
+  * Add FreeNX patches for nxagent (some with other names compared to FreeNX):
+    - 101_nxagent_set-rgb-path.patch
+    - 102_xserver-xext_set-securitypolicy-path.patch
+    - 103_nxagent_set-X0-config-path.patch
+    - 104_nxagent_enable_debug.patch
+    - 105_nxagent_export-remote-keyboard-config.patch
+    - 106_nxagent_utf8-copy-clipboard.patch
+    - 107_nxagent_clipboard-compound-text+small-bed-sheets.patch
+    - 108_nxagent_wine-close-delay.patch
+    - 109_nxagent_locale-utf8-compound-text.patch
+    - 200_nxagent_unbrand-agent.patch
+  * Adapt path names in FreeNX patches to meet requirements for source tree of
+    this package.
+  * Rework FreeNX patches to be applicable to latest NX sources.
+  * Install nxagent.xpm icon to /usr/share/pixmaps.
+  * Rename patch: 008_nxproxy_add-nx-proxy-wrapper.patch to
+    008_nxproxy_add-nxproxy-wrapper.patch.
+  * Add patch from FreeNX patchset:
+    110_nxagent_createpixmap-bounds-check.patch.
+  * Disable patch: 104_nxagent_enable_debug.patch for now as it let's the build
+    fail.
+  * Add patch: 017_nx-x11_update-autotools-helper-files.patch.
+  * Add README.source file, fixes lintian warning:
+    patch-system-but-no-source-readme.
+  * Add lintian-override: outdated-autotools-helper-file to
+    source.lintian-overrides as we patch-update the outdated helper files before
+    building binaries.
+  * Add patch: 018_nx-x11_update-libtool-ltmain-script.patch. Silence lintian
+    warning ancient-libtool via lintian override as we patch in a new version
+    of ltmain.sh by this patch.
+  * Update patch: 017_nx-x11_update-autotools-helper-files.patch. Add lintian
+    override to source.lintian-overrides: ancient-autotools-helper-file as we
+    handle autotools helper file updates via patch system.
+  * Add upstream CHANGELOG files to all .deb packages of this source package.
+  * Override lintian warnings
+    - libnx-x11: postinst-has-useless-call-to-ldconfig
+    - libnx-x11: postrm-has-useless-call-to-ldconfig
+    as they relate to a bug in debhelper (call of ldconfig although we did not
+    touch any directory controlled by /etc/ld.so.conf, amongst others
+    see BTS issue #205142).
+  * Make sure upstream changelog file names are in lower case.
+  * Disable patch: 006_remove-configure-files.patch, remove configure
+    files from within /debian/rules.
+  * Add patch: 019_nx-x11_expat-build-against-system-libxmltok.patch, fixes
+    lintian error: embedded-library: expat. Build-depend on libxmltok1-dev.
+  * Fix LD_LIBRARY_PATH export in wrapper scripts/patches.
+  * X2Go Packaging Team becomes maintainer, Mike Gabriel + Reinhard Tartler
+    become uploaders.
+  * Make `breaks-without-version' lintian overrides needless.
+  * Break/replace nxlibs and nxlibs-dev (packages provided by
+    freenx-team on Launchpad).
+  * Set homepage of NoMachine upstream site (using http://www.nomachine.com/sources.php).
+  * Packaging Vcs has been relocated to Alioth.
+  * Add more upstream source information to README.source.
+  * Remove *-dbg packages from /debian/control file.
+  * Make package descriptions in /debian/control more explanatory.
+  * Remove patch 006_remove-configure-files.patch. Implemented via
+    /debian/rules.
+  * Remove patches and put as executable scripts into /debian/bin/
+    - 005_add-nxagent-wrapper.patch.
+    - 008_add-nxproxy-wrapper.patch.
+    - 011_add-nxauth-wrapper.patch.
+  * Remove patch: 104_nxagent_enable_debug.patch, as it breaks package build.
+  * Add patch headers to all patch files, report most patches upstream. Waiting for
+    feedback and quotable URLs from NoMachine.
+  * Transfer patch: 009_nxproxy_add-man-page.patch into man page file
+    in /debian/man.
+  * Add patch: 011_nxcomp_sa-restorer.patch.
+  * Add/insert patch: 005_nxcomp_gcc43.patch.
+  * Fix line hunks: 011_nxcomp_sa-restorer.patch.
+  * Call dh_clean again. This got lost somewhere on the way.
+  * Remove branding from descriptions in control file.
+  * Add patch: 000_add-NX-redistribution-README.patch.
+  * Add patches: 009_add-nxagent-man-page.patch, 009_add-nxproxy-man-page.patch.
+    Reintroduce man page creation via patch system, so that all man pages
+    find their way into the NX-redistribution tarball created from this source
+    project.
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Tue, 10 Jan 2012 11:39:17 +0100
+
+nx-libs (2:3.5.0-1) unstable; urgency=low
+
+  * Initial release.
+    - nxcomp (3.5.0-2)
+    - nxcompext (3.5.0-1)
+    - nxcompshad (3.5.0-2)
+    - nx-X11 (3.5.0-2)
+    - nxagent (3.5.0-5)
+    - nxauth (3.5.0-1)
+    - nxproxy (3.5.0-1)
+  * Use NX adapted LD_LIBRARY_PATH in debian/rules.
+  * Add quilt as build dependency.
+  * Add main Makefile via patch: 001_add-main-makefile.patch.
+  * Add patch: 002_nxcompshad-build-against-nx-x11-only.patch.
+  * Add patch: 003_nxcompshad-gcc43.patch.
+  * Add patch: 004_nx-x11-fix-nxcompshad-build.patch.
+  * Add patch: 005_add-nxagent-wrapper.patch.
+  * Fix for lintian issue: missing-build-dependency quilt (>= 0.46-7~).
+  * Fix for lintian issue: extended-description-line-too-long (nxagent).
+  * Disabling build of *-dbg packages for now...
+  * Add patch: 006_remove-configure-files.patch.
+  * Add patch: 007_nxcompshad-clean-gch-files.patch.
+  * Remove unknown option --with from dh_auto_clean.
+  * Add autoconf as build dependency.
+  * Add patch: 008_add-nxproxy-wrapper.patch. Build nxproxy package.
+  * Add patch: 009_nxproxy-add-man-page.patch.
+  * Add nxproxy man page to nxproxy package.
+  * Fix of nxproxy build in main Makefile (modifies
+    001_add-main-makefile.patch).
+  * Add patch: 010_nxauth-fix-binary-name-in-man-page.patch.
+  * Add patch: 011_add-nxauth-wrapper.patch.
+  * Build nxauth package.
+  * Add lintian overrides for libxcomp*: breaks-without-version.
+  * Add patches: 012, 013, 014 - Makefile uninstall stanza patches for
+    nxcomp, nxcompext, nxcompshad.
+  * Add patch: 015_nxproxy-makefile-uninstall.patch.
+  * Add install/uninstall stanza to main Makefile (via patch
+    001_add-main-makefile.patch).
+  * Add patch 016_nx-x11-install.patch, to allow installation of nx-X11 from
+    Makefile (via make install).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Wed, 28 Dec 2011 19:05:48 +0100
