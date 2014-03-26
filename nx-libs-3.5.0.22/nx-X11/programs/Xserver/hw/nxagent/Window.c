@@ -2508,7 +2508,9 @@ void nxagentMapDefaultWindows()
       fprintf(stderr, "nxagentMapDefaultWindows: Showing the splash window.\n");
       #endif
 
-      nxagentShowSplashWindow(nxagentDefaultWindows[pScreen->myNum]);
+      /* QVD: Remove !M splash window.
+       * nxagentShowSplashWindow(nxagentDefaultWindows[pScreen->myNum]);
+       */
 
       /*
        * Map the default window. Defer the mapping if the session is

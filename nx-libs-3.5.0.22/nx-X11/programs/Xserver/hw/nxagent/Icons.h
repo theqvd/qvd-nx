@@ -22,7 +22,7 @@
 #include <X11/xpm.h>
 #undef Pixel
 
-#define NXAGENT_ICON_NAME  "nxagent.xpm"
+#define NXAGENT_ICON_NAME  "qvd.xpm"
 
 #define NXAGENT_PLACEHOLDER_NAME  "nxmissing.xpm"
 
