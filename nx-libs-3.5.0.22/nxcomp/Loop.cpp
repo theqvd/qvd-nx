@@ -350,7 +350,7 @@ static void RestoreSignal(int signal);
 
 static int HandleChildren();
 
-static int HandleChild(int child);
+int HandleChild(int child);
 static int CheckChild(int pid, int status);
 static int WaitChild(int child, const char *label, int force);
 
@@ -6222,6 +6222,8 @@ int HandleChildren()
 
     return 1;
   }
+
+  proxy->checkSlaves();
 
   //
   // This can actually happen either because we

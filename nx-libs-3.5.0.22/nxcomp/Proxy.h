@@ -287,6 +287,8 @@ class Proxy
 
   int handleNewSlaveConnectionFromProxy(int channelId);
 
+  void checkSlaves();
+
   //
   // Force closure of channels.
   //
@@ -1258,6 +1260,7 @@ class Proxy
 
   int channelMap_[CONNECTIONS_LIMIT];
   int fdMap_[CONNECTIONS_LIMIT];
+  int slavePidMap_[CONNECTIONS_LIMIT];
 };
 
 #endif /* Proxy_H */

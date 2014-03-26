@@ -75,6 +75,8 @@ struct sockaddr_un
 
 extern void CleanupListeners();
 
+extern int HandleChild(int);
+
 //
 // Default size of string buffers.
 //
@@ -148,6 +150,7 @@ Proxy::Proxy(int fd)
 
     fdMap_[channelId]      = nothing;
     channelMap_[channelId] = nothing;
+    slavePidMap_[channelId] = nothing;
   }
 
   inputChannel_  = nothing;
@@ -6336,42 +6339,94 @@ int Proxy::handleNewGenericConnectionFromProxy(int channelId, T_channel_type typ
 
 int Proxy::handleNewSlaveConnectionFromProxy(int channelId)
 {
-  //
-  // Implementation is incomplete. Opening a
-  // slave channel should let the proxy fork
-  // a new client and pass to it the channel
-  // descriptors. For now we make the channel
-  // fail immediately.
-  //
-  // #include <fcntl.h>
-  // #include <sys/types.h>
-  // #include <sys/stat.h>
-  //
-  // char *slaveServer = "/dev/null";
-  //
-  // #ifdef TEST
-  // *logofs << "Proxy: Opening file '" << slaveServer
-  //         << "'.\n" << logofs_flush;
-  // #endif
-  //
-  // int serverFd = open(slaveServer, O_RDWR);
-  //
-  // if (handlePostConnectionFromProxy(channelId, serverFd, channel_slave, "slave") < 0)
-  // {
-  //   return -1;
-  // }
-  //
 
-  #ifdef WARNING
-  *logofs << "Proxy: Refusing new slave connection for "
-          << "channel ID#" << channelId << "\n"
-          << logofs_flush;
-  #endif
+  cerr << "Info" << ": New slave connection on "
+       << "channel ID#" << channelId << "\n";
 
-  cerr << "Warning" << ": Refusing new slave connection for "
-          << "channel ID#" << channelId << "\n";
+  char *qvd_slave_cmd = getenv("QVD_SLAVE_CMD");
+  if (qvd_slave_cmd == NULL) {
+    return -1;
+  }
 
-  return -1;
+  int spair[2];
+  if (socketpair(AF_UNIX, SOCK_STREAM, 0, spair) == -1) {
+    perror("socketpair");
+    return -1;
+  }
+
+  int serverFd = spair[0];
+  int clientFd = spair[1];
+
+  if (handlePostConnectionFromProxy(channelId, serverFd, channel_slave, "slave") < 0)
+  {
+    close(serverFd);
+    close(clientFd);
+    return -1;
+  }
+
+
+  int pid = fork();
+  if (pid == 0)
+  {
+
+    if (dup2(clientFd, 0) == -1) 
+    {
+      perror("dup2");
+      exit(1);
+    }
+
+    if (dup2(clientFd, 1) == -1) 
+    {
+      perror("dup2");
+      exit(1);
+    }
+
+    close(serverFd);
+    close(clientFd);
+
+    /* Close FDs used by NX, QVD #1208 */
+    for (int fd = 3; fd < 256; fd++) {
+        close(fd);
+    }
+
+    char *const argv[2] = {qvd_slave_cmd, NULL};
+
+    if (execv(qvd_slave_cmd, argv) == -1) 
+    {
+      perror("execv");
+    }
+    exit(1);
+
+  }
+  else if (pid == -1)
+  {
+    // TODO Test this!
+    perror("fork");
+    close(serverFd);
+    close(clientFd);
+    return -1;
+  }
+
+  close(clientFd);
+  slavePidMap_[channelId] = pid;
+
+  cerr << "Info" << ": slave channel ID#" << channelId << " handler has PID " << pid << endl;
+
+  return 1;
+}
+
+void Proxy::checkSlaves()
+{
+  for (int channelId = 0; channelId<CONNECTIONS_LIMIT; channelId++) 
+  {
+    int pid = slavePidMap_[channelId];
+
+    if (pid > 1 && HandleChild(pid))
+    {
+      slavePidMap_[channelId] = nothing;
+      cerr << "Info:" << " Handled death of slave with pid " << pid << endl;
+    }
+  }
 }
 
 int Proxy::handlePostConnectionFromProxy(int channelId, int serverFd,
