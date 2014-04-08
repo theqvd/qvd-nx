@@ -1,0 +1,11 @@
+*.a
+*.so*
+*.o
+*.bak
+*.cache
+*.status
+*.log
+Makefile
+configure
+nxproxy
+tags
