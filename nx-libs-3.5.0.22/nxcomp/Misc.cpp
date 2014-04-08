@@ -297,6 +297,21 @@ static const char UsageInfo[] =
                a program providing encryption of the point to point\n\
                communication.\n\
 \n\
+  token_size=n\n\
+  token_limit=n\n\
+  split_mode=n\n\
+  split_total_size=n\n\
+  split_total_storage_size=n\n\
+  split_timeout=n\n\
+  motion_timeout=n\n\
+  idle_timeout=n\n\
+  pack_method=n\n\
+  pack_quality=n\n\
+               These options define a custom link type. If used, they\n\
+               must appear after the link= option in the command line\n\
+               arguments. Any later link= options will override any\n\
+               changes made.\n\
+\n\
 rootless=b\n\
 geometry=s\n\
 resize=b\n\

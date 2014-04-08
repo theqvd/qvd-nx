@@ -8829,6 +8829,47 @@ int ParseEnvironmentOptions(const char *env, int force)
     {
       strncpy(productName, value, DEFAULT_STRING_LENGTH - 1);
     }
+    else if (strcasecmp(name, "token_size") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->TokenSize = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "token_limit") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->TokenLimit = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "split_mode") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->SplitMode = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "split_total_size") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->SplitTotalSize = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "split_total_storage_size") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->SplitTotalStorageSize = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "split_timeout") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->SplitTimeout = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "motion_timeout") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->MotionTimeout = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "idle_timeout") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->IdleTimeout = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "pack_method") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->PackMethod = ValidateArg("local", name, value);
+    }
+    else if (strcasecmp(name, "pack_quality") == 0 ) {
+      control->LinkMode = LINK_TYPE_CUSTOM;
+      control->PackQuality = ValidateArg("local", name, value);
+    }
+
     else if (strcasecmp(name, "rootless") == 0 ||
                  strcasecmp(name, "geometry") == 0 ||
                      strcasecmp(name, "resize") == 0 ||

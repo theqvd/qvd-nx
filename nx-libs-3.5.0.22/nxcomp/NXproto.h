@@ -59,7 +59,7 @@ extern "C" {
 #define sz_xGetUnpackParametersReply            32
 #define sz_xGetShmemParametersReply             32
 
-#define LINK_TYPE_LIMIT                         5
+#define LINK_TYPE_LIMIT                         6
 
 #define LINK_TYPE_NONE                          0
 #define LINK_TYPE_MODEM                         1
@@ -67,6 +67,7 @@ extern "C" {
 #define LINK_TYPE_ADSL                          3
 #define LINK_TYPE_WAN                           4
 #define LINK_TYPE_LAN                           5
+#define LINK_TYPE_CUSTOM                        6
 
 /*
  * NX Replies.
