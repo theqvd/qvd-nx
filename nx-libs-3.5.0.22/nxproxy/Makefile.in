@@ -15,11 +15,11 @@ CXXFLAGS = @CXXFLAGS@ @X_CFLAGS@ @DEFS@ \
            -Wall -Wpointer-arith -Wstrict-prototypes -Wmissing-prototypes \
            -Wmissing-declarations -Wnested-externs
 
-CXXINCLUDES = -I. -I../nxcomp
+CXXINCLUDES = -I. -I../nxcomp -I../nxcomp -I/usr/include/nx -I/usr/include/X11 -I/usr/include/xorg -I/usr/include/pixman-1
 
 CC         = @CC@
 CCFLAGS    = $(CXXFLAGS)
-CCINCLUDES = -I. -I../nxcomp
+CCINCLUDES = -I. -I../nxcomp -I../nxcomp -I/usr/include/nx -I/usr/include/X11 -I/usr/include/xorg -I/usr/include/pixman-1
 CCDEFINES  =
 
 LDFLAGS = @LDFLAGS@
