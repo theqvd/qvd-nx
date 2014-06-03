@@ -8832,42 +8832,72 @@ int ParseEnvironmentOptions(const char *env, int force)
     else if (strcasecmp(name, "token_size") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->TokenSize = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option token_size to " << control->TokenSize << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "token_limit") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->TokenLimit = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option token_limit to " << control->TokenLimit << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "split_mode") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->SplitMode = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option split_mode to " << control->SplitMode << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "split_total_size") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->SplitTotalSize = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option split_mode to " << control->SplitTotalSize << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "split_total_storage_size") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->SplitTotalStorageSize = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option split_total_storage_size to " << control->SplitTotalStorageSize << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "split_timeout") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->SplitTimeout = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option split_timeout to " << control->SplitTimeout << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "motion_timeout") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->MotionTimeout = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option motion_timeout to " << control->MotionTimeout << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "idle_timeout") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->IdleTimeout = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option idle_timeout to " << control->IdleTimeout << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "pack_method") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->PackMethod = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option pack_method to " << control->PackMethod << "\n" << logofs_flush;
+      #endif
     }
     else if (strcasecmp(name, "pack_quality") == 0 ) {
       control->LinkMode = LINK_TYPE_CUSTOM;
       control->PackQuality = ValidateArg("local", name, value);
+      #ifdef DEBUG
+      *logofs << "Loop: Setting option pack_quality to " << control->PackQuality << "\n" << logofs_flush;
+      #endif
     }
 
     else if (strcasecmp(name, "rootless") == 0 ||
