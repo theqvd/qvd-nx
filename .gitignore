@@ -5,6 +5,7 @@
 *.cache
 *.status
 *.log
+*.swp
 Makefile
 configure
 nxproxy
