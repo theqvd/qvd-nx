@@ -621,6 +621,7 @@ static int SetLinkIsdn();
 static int SetLinkAdsl();
 static int SetLinkWan();
 static int SetLinkLan();
+static void SetLinkOverride();
 
 //
 // Adjust the compression parameters.
@@ -773,6 +774,16 @@ static char optionsFileName[DEFAULT_STRING_LENGTH] = { 0 };
 //
 
 static char linkSpeedName[DEFAULT_STRING_LENGTH] = { 0 };
+
+static int tokenSize = -1;
+static int tokenLimit = -1;
+static int splitMode = -1;
+static int splitTotalSize = -1;
+static int splitTotalStorageSize = -1;
+static int splitTimeout = -1;
+static int motionTimeout = -1;
+static int idleTimeout = -1;
+
 
 //
 // String literal representing selected
@@ -5423,6 +5434,15 @@ void CleanupLocal()
   *packMethodName   = '\0';
   *productName      = '\0';
 
+  tokenSize             = -1;
+  tokenLimit            = -1;
+  splitMode             = -1;
+  splitTotalSize        = -1;
+  splitTotalStorageSize = -1;
+  splitTimeout          = -1;
+  motionTimeout         = -1;
+  idleTimeout           = -1;
+
   packMethod  = -1;
   packQuality = -1;
 
@@ -8830,74 +8850,36 @@ int ParseEnvironmentOptions(const char *env, int force)
       strncpy(productName, value, DEFAULT_STRING_LENGTH - 1);
     }
     else if (strcasecmp(name, "token_size") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->TokenSize = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option token_size to " << control->TokenSize << "\n" << logofs_flush;
-      #endif
+      tokenSize = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "token_limit") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->TokenLimit = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option token_limit to " << control->TokenLimit << "\n" << logofs_flush;
-      #endif
+      tokenLimit = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "split_mode") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->SplitMode = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option split_mode to " << control->SplitMode << "\n" << logofs_flush;
-      #endif
+      splitMode = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "split_total_size") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->SplitTotalSize = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option split_mode to " << control->SplitTotalSize << "\n" << logofs_flush;
-      #endif
+      splitTotalSize = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "split_total_storage_size") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->SplitTotalStorageSize = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option split_total_storage_size to " << control->SplitTotalStorageSize << "\n" << logofs_flush;
-      #endif
+      splitTotalStorageSize = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "split_timeout") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->SplitTimeout = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option split_timeout to " << control->SplitTimeout << "\n" << logofs_flush;
-      #endif
+      splitTimeout = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "motion_timeout") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->MotionTimeout = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option motion_timeout to " << control->MotionTimeout << "\n" << logofs_flush;
-      #endif
+      motionTimeout = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "idle_timeout") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->IdleTimeout = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option idle_timeout to " << control->IdleTimeout << "\n" << logofs_flush;
-      #endif
+      idleTimeout = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "pack_method") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->PackMethod = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option pack_method to " << control->PackMethod << "\n" << logofs_flush;
-      #endif
+      // TODO: check
+      packMethod = ValidateArg("local", name, value);
     }
     else if (strcasecmp(name, "pack_quality") == 0 ) {
-      control->LinkMode = LINK_TYPE_CUSTOM;
-      control->PackQuality = ValidateArg("local", name, value);
-      #ifdef DEBUG
-      *logofs << "Loop: Setting option pack_quality to " << control->PackQuality << "\n" << logofs_flush;
-      #endif
+      // TODO: check
+      packQuality = ValidateArg("local", name, value);
     }
 
     else if (strcasecmp(name, "rootless") == 0 ||
@@ -11944,6 +11926,13 @@ int SetParameters()
   SetLink();
 
   //
+  // Override specific parts of the link
+  // parameters
+  //
+
+  SetLinkOverride();
+
+  //
   // Set compression according to link speed.
   //
 
@@ -13086,6 +13075,83 @@ int SetLinkLan()
   control -> PackQuality = 9;
 
   return 1;
+}
+
+void SetLinkOverride()
+{
+
+  if ( tokenSize != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter TokenSize from " << control -> TokenSize << " to " << tokenSize << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> TokenSize = tokenSize;
+  }
+
+  if ( tokenLimit != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter TokenLimit from " << control -> TokenLimit << " to " << tokenLimit << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> TokenLimit = tokenLimit;
+  }
+
+  if ( splitMode != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter SplitMode from " << control -> SplitMode << " to " << splitMode << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> SplitMode = splitMode;
+  }
+
+  if ( splitTotalSize != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter SplitTotalSize from " << control -> SplitTotalSize << " to " << splitTotalSize << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> SplitTotalSize = splitTotalSize;
+  }
+
+  if ( splitTotalStorageSize != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter SplitTotalStorageSize from " << control -> SplitTotalStorageSize << " to " << splitTotalStorageSize << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> SplitTotalStorageSize = splitTotalStorageSize;
+  }
+
+  if ( splitTimeout != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter SplitTimeout from " << control -> SplitTimeout << " to " << splitTimeout << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> SplitTimeout = splitTimeout;
+  }
+
+  if ( motionTimeout != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter MotionTimeout from " << control -> MotionTimeout << " to " << motionTimeout << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> MotionTimeout = motionTimeout;
+  }
+
+  if ( idleTimeout != -1 )
+  {
+     #ifdef TEST
+     *logofs << "Loop: Overriding parameter IdleTimeout from " << control -> IdleTimeout << " to " << idleTimeout << logofs_flush;
+     #endif
+     control -> LinkMode = LINK_TYPE_CUSTOM;
+     control -> IdleTimeout = idleTimeout;
+  }
+
 }
 
 //
