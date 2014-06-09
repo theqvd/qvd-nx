@@ -3356,7 +3356,12 @@ int InitBeforeNegotiation()
 
   if (control -> ProxyMode == proxy_client)
   {
+    cerr << "Info: InitBeforeNegotiation: calling SetParameters: we're proxy_client\n" << logofs_flush;
     SetParameters();
+  }
+  else
+  {
+    cerr << "Info: InitBeforeNegotiation: NOT calling SetParameters: we're proxy_server\n" << logofs_flush;
   }
 
   return 1;
@@ -3467,7 +3472,12 @@ int InitAfterNegotiation()
 
   if (control -> ProxyMode == proxy_server)
   {
+    cerr << "Info: InitAfterNegotiation: calling SetParameters: we're proxy_server\n" << logofs_flush;
     SetParameters();
+  }
+  else
+  {
+    cerr << "Info: InitAfterNegotiation: NOT calling SetParameters: we're proxy_client\n" << logofs_flush;
   }
 
   //
@@ -13079,75 +13089,60 @@ int SetLinkLan()
 
 void SetLinkOverride()
 {
+  cerr << "Loop: Applying custom parameters\n";
 
   if ( tokenSize != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter TokenSize from " << control -> TokenSize << " to " << tokenSize << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter TokenSize from " << control -> TokenSize << " to " << tokenSize << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> TokenSize = tokenSize;
   }
 
   if ( tokenLimit != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter TokenLimit from " << control -> TokenLimit << " to " << tokenLimit << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter TokenLimit from " << control -> TokenLimit << " to " << tokenLimit << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> TokenLimit = tokenLimit;
   }
 
   if ( splitMode != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter SplitMode from " << control -> SplitMode << " to " << splitMode << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter SplitMode from " << control -> SplitMode << " to " << splitMode << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitMode = splitMode;
   }
 
   if ( splitTotalSize != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter SplitTotalSize from " << control -> SplitTotalSize << " to " << splitTotalSize << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter SplitTotalSize from " << control -> SplitTotalSize << " to " << splitTotalSize << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitTotalSize = splitTotalSize;
   }
 
   if ( splitTotalStorageSize != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter SplitTotalStorageSize from " << control -> SplitTotalStorageSize << " to " << splitTotalStorageSize << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter SplitTotalStorageSize from " << control -> SplitTotalStorageSize << " to " << splitTotalStorageSize << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitTotalStorageSize = splitTotalStorageSize;
   }
 
   if ( splitTimeout != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter SplitTimeout from " << control -> SplitTimeout << " to " << splitTimeout << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter SplitTimeout from " << control -> SplitTimeout << " to " << splitTimeout << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitTimeout = splitTimeout;
   }
 
   if ( motionTimeout != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter MotionTimeout from " << control -> MotionTimeout << " to " << motionTimeout << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter MotionTimeout from " << control -> MotionTimeout << " to " << motionTimeout << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> MotionTimeout = motionTimeout;
   }
 
   if ( idleTimeout != -1 )
   {
-     #ifdef TEST
-     *logofs << "Loop: Overriding parameter IdleTimeout from " << control -> IdleTimeout << " to " << idleTimeout << logofs_flush;
-     #endif
+     cerr << "Loop: Overriding parameter IdleTimeout from " << control -> IdleTimeout << " to " << idleTimeout << "\n";
      control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> IdleTimeout = idleTimeout;
   }
