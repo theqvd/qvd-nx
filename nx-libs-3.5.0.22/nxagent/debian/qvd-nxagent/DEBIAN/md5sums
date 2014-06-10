@@ -1,0 +1,7 @@
+b73e7c6b8b826afbd0d91967532a7575  usr/bin/nxagent
+6285b84e5ab00cba012178e81125bde1  usr/share/doc/qvd-nxagent/changelog.Debian.gz
+4ae0155a0cd0ed56a2029fc012bc6b33  usr/share/doc/qvd-nxagent/copyright
+1acbb56386434b9cbd77feef880895c7  usr/share/man/man1/nxagent.1.gz
+5e63f298721bdd4062d3c66967df99ba  usr/share/nxagent/SecurityPolicy
+09ee098b83d94c7c046d6b55ebe84ae1  usr/share/nxagent/rgb
+de90e3be8a9714b2f962009c4dacef39  usr/share/pixmaps/nxagent.xpm

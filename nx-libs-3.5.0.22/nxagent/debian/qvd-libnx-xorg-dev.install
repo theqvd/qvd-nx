@@ -1,0 +1,5 @@
+nx-X11/lib/X11/libNX_X11.so		usr/lib/nx/
+nx-X11/lib/Xext/libNX_Xext.so		usr/lib/nx/
+nx-X11/lib/Xrender/libNX_Xrender.so	usr/lib/nx/
+debian/libnx-xorg-dev.tmp/include/*		usr/include/nx/
+nx-X11/programs/Xserver/include/dix.h	usr/include/nx/

@@ -1,0 +1,2 @@
+shlibs:Depends=libc6 (>= 2.15), libxml2 (>= 2.7.4), qvd-libnx-xorg, qvd-libxcomp3, qvd-libxcompext3, qvd-libxcompshad3, zlib1g (>= 1:1.1.4)
+misc:Depends=

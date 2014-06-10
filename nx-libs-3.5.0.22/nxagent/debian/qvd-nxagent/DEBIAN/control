@@ -1,0 +1,15 @@
+Package: qvd-nxagent
+Version: 3.5.0-2build4
+Architecture: amd64
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Installed-Size: 5300
+Depends: libc6 (>= 2.15), libxml2 (>= 2.7.4), qvd-libnx-xorg, qvd-libxcomp3, qvd-libxcompext3, qvd-libxcompshad3, zlib1g (>= 1:1.1.4)
+Conflicts: nxagent
+Section: x11
+Priority: extra
+Description: X server for remote access
+ NX is a X server for remote access. It implements a very efficient
+ compression of the X11 protocol. This increases performance when
+ using X applications over a network, providing a near local experience.
+ .
+ This package contains the server side NX agent

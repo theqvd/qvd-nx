@@ -1,0 +1,11 @@
+nx-X11/lib/X11/libNX_X11.so.*		usr/lib/
+nx-X11/lib/Xdmcp/libNX_Xdmcp.so.*		usr/lib/
+nx-X11/lib/Xinerama/libNX_Xinerama.so.*		usr/lib/
+nx-X11/lib/Xpm/libNX_Xpm.so.*		usr/lib/
+nx-X11/lib/Xext/libNX_Xext.so.*		usr/lib/
+nx-X11/lib/Xrender/libNX_Xrender.so.*	usr/lib/
+nx-X11/lib/Xrandr/libNX_Xrandr.so.*	usr/lib/
+nx-X11/lib/Xdamage/libNX_Xdamage.so.*	usr/lib/
+nx-X11/lib/Xfixes/libNX_Xfixes.so.*	usr/lib/
+nx-X11/lib/Xtst/libNX_Xtst.so.*	usr/lib/
+nx-X11/lib/Xcomposite/libNX_Xcomposite.so.*	usr/lib/

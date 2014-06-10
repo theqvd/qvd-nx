@@ -1,0 +1,8 @@
+qvd-libnx-xorg_3.5.0-1_amd64.deb x11 extra
+qvd-libnx-xorg-dev_3.5.0-1_all.deb libdevel extra
+qvd-nxagent_3.5.0-1_amd64.deb x11 extra
+qvd-nxagent-dev_3.5.0-1_all.deb libdevel extra
+qvd-libxcompext3_3.5.0-1_amd64.deb x11 extra
+qvd-libxcompext-dev_3.5.0-1_amd64.deb libdevel extra
+qvd-libxcompshad3_3.5.0-1_amd64.deb x11 extra
+qvd-libxcompshad-dev_3.5.0-1_amd64.deb libdevel extra

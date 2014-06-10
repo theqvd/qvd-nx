@@ -1,0 +1,13 @@
+533cf325b9c2ce5d413033da00cb6ecb  usr/lib/libNX_X11.so.6.2
+879645710a61a83e759986233a027c2b  usr/lib/libNX_Xcomposite.so.1.0
+14550b705c57bf913e8f42d33197436b  usr/lib/libNX_Xdamage.so.1.0
+9c069ce80bb10037ee75cfc56e9c2d46  usr/lib/libNX_Xdmcp.so.6.0
+4115fa4023d52e5421f5bed6045e3521  usr/lib/libNX_Xext.so.6.4
+ee2ff41e22ddb0940285bebd279b1170  usr/lib/libNX_Xfixes.so.3.0
+22d02b71f695aefa88c9a419d69a40f8  usr/lib/libNX_Xinerama.so.1.0
+acafada1030b1359325295abf8245717  usr/lib/libNX_Xpm.so.4.11
+f89c18e97eef9dbafe1e9345a40fe684  usr/lib/libNX_Xrandr.so.2.0
+8ae56131959cec8d30e74e86dd6c8bd0  usr/lib/libNX_Xrender.so.1.2.2
+903291ef978d775dc27b74e1b60dfd78  usr/lib/libNX_Xtst.so.6.1
+6285b84e5ab00cba012178e81125bde1  usr/share/doc/qvd-libnx-xorg/changelog.Debian.gz
+4ae0155a0cd0ed56a2029fc012bc6b33  usr/share/doc/qvd-libnx-xorg/copyright

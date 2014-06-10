@@ -1,0 +1,16 @@
+Package: qvd-libxcompext3
+Source: qvd-nxagent
+Version: 3.5.0-2build4
+Architecture: amd64
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Installed-Size: 120
+Depends: libc6 (>= 2.14), libjpeg8 (>= 8c), libpng12-0 (>= 1.2.13-4), qvd-libnx-xorg, qvd-libxcomp3, zlib1g (>= 1:1.1.4)
+Conflicts: libxcompext3
+Section: x11
+Priority: extra
+Description: NX X11 protocol compression extensions library
+ NX is a software suite from NoMachine which implements very efficient
+ compression of the X11 protocol. This increases performance when
+ using X applications over a network, especially a slow one.
+ .
+ libXcompext extends the core NX library with additional features.
