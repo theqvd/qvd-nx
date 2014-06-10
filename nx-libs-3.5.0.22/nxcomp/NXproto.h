@@ -67,7 +67,6 @@ extern "C" {
 #define LINK_TYPE_ADSL                          3
 #define LINK_TYPE_WAN                           4
 #define LINK_TYPE_LAN                           5
-#define LINK_TYPE_CUSTOM                        6
 
 /*
  * NX Replies.

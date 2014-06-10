@@ -13094,56 +13094,48 @@ void SetLinkOverride()
   if ( tokenSize != -1 )
   {
      cerr << "Loop: Overriding parameter TokenSize from " << control -> TokenSize << " to " << tokenSize << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> TokenSize = tokenSize;
   }
 
   if ( tokenLimit != -1 )
   {
      cerr << "Loop: Overriding parameter TokenLimit from " << control -> TokenLimit << " to " << tokenLimit << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> TokenLimit = tokenLimit;
   }
 
   if ( splitMode != -1 )
   {
      cerr << "Loop: Overriding parameter SplitMode from " << control -> SplitMode << " to " << splitMode << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitMode = splitMode;
   }
 
   if ( splitTotalSize != -1 )
   {
      cerr << "Loop: Overriding parameter SplitTotalSize from " << control -> SplitTotalSize << " to " << splitTotalSize << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitTotalSize = splitTotalSize;
   }
 
   if ( splitTotalStorageSize != -1 )
   {
      cerr << "Loop: Overriding parameter SplitTotalStorageSize from " << control -> SplitTotalStorageSize << " to " << splitTotalStorageSize << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitTotalStorageSize = splitTotalStorageSize;
   }
 
   if ( splitTimeout != -1 )
   {
      cerr << "Loop: Overriding parameter SplitTimeout from " << control -> SplitTimeout << " to " << splitTimeout << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> SplitTimeout = splitTimeout;
   }
 
   if ( motionTimeout != -1 )
   {
      cerr << "Loop: Overriding parameter MotionTimeout from " << control -> MotionTimeout << " to " << motionTimeout << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> MotionTimeout = motionTimeout;
   }
 
   if ( idleTimeout != -1 )
   {
      cerr << "Loop: Overriding parameter IdleTimeout from " << control -> IdleTimeout << " to " << idleTimeout << "\n";
-     control -> LinkMode = LINK_TYPE_CUSTOM;
      control -> IdleTimeout = idleTimeout;
   }
 

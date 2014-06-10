@@ -1126,12 +1126,6 @@ int Statistics::getClientOverallStats(int type, char *&buffer)
 
       break;
     }
-    case LINK_TYPE_CUSTOM:
-    {
-      strcpy(label, "Custom");
-
-      break;
-    }
     default:
     {
       strcpy(label, "Unknown");
