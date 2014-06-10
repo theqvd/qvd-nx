@@ -1,0 +1,11 @@
+nxproxy for Debian
+------------------
+
+nxproxy is part of the NX X compression system. It is part of the GPL NX
+components provided by NoMachine, but does not comprise a complete NX
+solution.  It merely provides a binary to be called by NX clients.
+
+nxcl and qtnx provide the NX client solution in Debian and unless you know what you are doing, you should not call nxproxy directly, but use qtnx instead.
+
+-- 
+Matthew Johnson <mjj29@debian.org>
