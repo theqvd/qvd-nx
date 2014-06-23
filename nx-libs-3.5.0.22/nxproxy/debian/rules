@@ -3,3 +3,7 @@
 %:
 	dh $@
 
+override_dh_auto_build:
+	autoreconf -fi
+	./configure --prefix=/usr --bindir=/usr/bin
+	$(MAKE)
