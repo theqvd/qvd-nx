@@ -48,7 +48,7 @@ CCINCLUDES  =
 CCDEFINES   =
 
 LDFLAGS     = @LDFLAGS@
-LIBS        = @LIBS@ -lNX_X11
+LIBS        = @LIBS@ -L../nx-X11/exports/lib -lNX_X11
 
 #
 # Only if THREADS is defined.

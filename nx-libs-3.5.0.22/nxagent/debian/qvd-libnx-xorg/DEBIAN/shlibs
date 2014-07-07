@@ -1,0 +1,11 @@
+libNX_Xrandr 2 qvd-libnx-xorg
+libNX_Xdamage 1 qvd-libnx-xorg
+libNX_Xcomposite 1 qvd-libnx-xorg
+libNX_X11 6 qvd-libnx-xorg
+libNX_Xinerama 1 qvd-libnx-xorg
+libNX_Xtst 6 qvd-libnx-xorg
+libNX_Xdmcp 6 qvd-libnx-xorg
+libNX_Xpm 4 qvd-libnx-xorg
+libNX_Xext 6 qvd-libnx-xorg
+libNX_Xfixes 3 qvd-libnx-xorg
+libNX_Xrender 1 qvd-libnx-xorg

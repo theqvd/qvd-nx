@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+DEB_DH_SHLIBDEPS_ARGS := -ldebian/libnx-xorg/usr/lib/nx
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	# prepare nxagent
+	[ ! -d nx-X11/programs/Xserver/hw/nxagent ] && \
+		echo "Injecting NXAgent into tree" && \
+	        cp -r programs/Xserver/hw/nxagent nx-X11/programs/Xserver/hw/ 
+	# build the nx core
+
+	cd nxcomp && autoreconf -fi && ./configure && cd .. 
+	cd nxcompext && autoreconf -fi && ./configure && cd ..
+	cd nxcompshad && autoreconf -fi && ./configure && cd .. 
+	cd nx-X11 && $(MAKE) World
+
+	find -L . -name '*.so.*'  | xargs strip -v --strip-unneeded
+
+	# convert symlinks to real files
+	mkdir -p debian/libnx-xorg-dev.tmp
+	cp -RL nx-X11/exports/include debian/libnx-xorg-dev.tmp/ || true
+
+clean:
+	[ -f debian/files ] && rm -f debian/files
+	touch debian/files
+	rm -rf debian/libnx-xorg-dev.tmp
+	rm -rf nx-X11/programs/Xserver/hw/nxagent
+	rm -rf debian/qvd-libnx-xorg debian/qvd-libnx-xorg-dev debian/qvd-nxagent-dev debian/qvd-nxagent debian/qvd-libxcompext3 debian/qvd-libxcompext-dev debian/qvd-libxcompshad-dev debian/qvd-libxcompshad3 debian/*debhelper debian/*.log debian/*.substvars

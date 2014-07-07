@@ -1,0 +1,15 @@
+e3a3e32b6142cfb6519adeedf2dab663  usr/include/nx/Core.h
+bc6d814a8c2bef7e08561d911b197b96  usr/include/nx/Input.h
+49a22a89e3d59382a998b6bce3ce7058  usr/include/nx/Logger.h
+ab0141bc6da8feb27567382f95063ab2  usr/include/nx/Manager.h
+146f4f7fd5dcb0f9d681dc61e10644d5  usr/include/nx/Misc.h
+8100ba845aeff8ebee6c2673edf4f446  usr/include/nx/Poller.h
+c309bfbdb472f2222a282fbd4baa2ac9  usr/include/nx/Regions.h
+65a42c36b1c2d7d7ad0376b57f149a78  usr/include/nx/Shadow.h
+fb6601390b67c990b37f1d27222da6f6  usr/include/nx/Updater.h
+fabb15ae2e3d4f30a7630fe12fd5264e  usr/include/nx/Win.h
+afc1460173a329026d75437a3b364a47  usr/include/nx/X11.h
+8f577e7b7d81cad77ee45e42e0655ea5  usr/lib/libXcompshad.a
+8f577e7b7d81cad77ee45e42e0655ea5  usr/lib/nx/libXcompshad.a
+6285b84e5ab00cba012178e81125bde1  usr/share/doc/qvd-libxcompshad-dev/changelog.Debian.gz
+4ae0155a0cd0ed56a2029fc012bc6b33  usr/share/doc/qvd-libxcompshad-dev/copyright

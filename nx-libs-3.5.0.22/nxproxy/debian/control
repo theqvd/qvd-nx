@@ -1,0 +1,17 @@
+Source: qvd-nxproxy
+Priority: optional
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Build-Depends: debhelper (>=7.0.25), automake, autoconf, qvd-libxcomp-dev, libstdc++-dev
+Standards-Version: 3.8.4
+Section: x11
+
+Package: qvd-nxproxy
+Section: x11
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: qtnx
+Description: NX X compression library
+ NX provides a differential X compression library for X11.
+ .
+ This package provides the X proxy (client) binary.
+

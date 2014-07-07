@@ -1,0 +1,16 @@
+Package: qvd-libxcompshad-dev
+Source: qvd-nxagent
+Version: 3.5.0-2build4
+Architecture: amd64
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Installed-Size: 253
+Depends: qvd-libxcompshad3 (= 3.5.0-2build4)
+Conflicts: libxcompshad3
+Section: libdevel
+Priority: extra
+Description: NX shadowing library
+ NX is a software suite from NoMachine which implements very efficient
+ compression of the X11 protocol. This increases performance when
+ using X applications over a network, especially a slow one.
+ .
+ This package contains the development files for the nxcompshad library.

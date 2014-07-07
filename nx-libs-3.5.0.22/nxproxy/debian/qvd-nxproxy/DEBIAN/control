@@ -1,0 +1,12 @@
+Package: qvd-nxproxy
+Version: 3.5.0-1
+Architecture: amd64
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Installed-Size: 36
+Suggests: qtnx
+Section: x11
+Priority: optional
+Description: NX X compression library
+ NX provides a differential X compression library for X11.
+ .
+ This package provides the X proxy (client) binary.
