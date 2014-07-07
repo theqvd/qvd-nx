@@ -1,0 +1,4 @@
+libXcomp.so	usr/lib
+libXcomp.a	usr/lib
+NX*.h		usr/include
+MD5.h		usr/include

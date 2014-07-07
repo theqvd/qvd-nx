@@ -1,0 +1,27 @@
+qvd-nxagent (3.5.0-2build4) precise; urgency=low
+
+  * Testing to include ../nx in nxcompshad  
+
+ -- Quality Virtual Desktop (Clave de QVD) <qvd@qindel.com>  Wed, 25 Jul 2012 09:16:24 +0200
+
+qvd-nxagent (3.5.0-2build1) precise; urgency=low
+
+  [ Quality Virtual Desktop (Clave de QVD) ]
+  * Uploading cleaned source
+
+  [ root ]
+  * Test
+
+ -- Quality Virtual Desktop (Clave de QVD) <qvd@qindel.com>  Tue, 24 Jul 2012 10:14:43 +0200
+
+qvd-nxagent (3.5.0-2) precise; urgency=low
+
+  * Changing Conflicts and dependencies names
+
+ -- Quality Virtual Desktop (Clave de QVD) <qvd@qindel.com>  Mon, 23 Jul 2012 12:40:51 +0200
+
+qvd-nxagent (3.5.0-1) precise; urgency=low
+
+  * Test
+
+ -- Quality Virtual Desktop (Clave de QVD) <qvd@qindel.com>  Fri, 20 Jul 2012 11:40:25 +0200

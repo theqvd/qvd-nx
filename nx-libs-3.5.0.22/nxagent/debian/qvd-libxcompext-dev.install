@@ -1,0 +1,2 @@
+nxcompext/libXcompext.so usr/lib
+nxcompext/NX*.h usr/include

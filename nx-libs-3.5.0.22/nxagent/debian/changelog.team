@@ -1,0 +1,891 @@
+nx (3.3.0-5-10-0freenxteam1) hardy; urgency=low
+
+  * New upstream release
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Thu, 22 Jan 2009 21:27:06 -0200
+
+nx (3.3.0-4-9-0freenxteam2) hardy; urgency=low
+
+  * Use the session path from Error.c
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Thu, 22 Jan 2009 11:54:05 -0200
+
+nx (3.3.0-4-9-0freenxteam1) intrepid; urgency=low
+
+  * New upstream release
+    - Remove keyboard related patches:
+      - 91_enable_debug
+      - 92_keyboard_changes
+  * Add patch to export the client keyboard configs.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Thu, 15 Jan 2009 17:23:32 -0200
+
+nx (3.3.0-3-6-0freenxteam9) intrepid; urgency=low
+
+  * Update patches
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 25 Nov 2008 15:56:16 -0200
+
+nx (3.3.0-3-6-0freenxteam8) intrepid; urgency=low
+
+  * Remove keyboard changes
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 25 Nov 2008 00:56:38 -0200
+
+nx (3.3.0-3-6-0freenxteam7) intrepid; urgency=low
+
+  * If couldn't copy the remote keymap, so just use the configs.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 24 Nov 2008 19:18:57 -0200
+
+nx (3.3.0-3-6-0freenxteam6) intrepid; urgency=low
+
+  * If the remote rules is not found on the server, then fall back to default
+    rules.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 24 Nov 2008 18:41:38 -0200
+
+nx (3.3.0-3-6-0freenxteam5) intrepid; urgency=low
+
+  * Print information when copying the keymap from the client
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 24 Nov 2008 18:01:44 -0200
+
+nx (3.3.0-3-6-0freenxteam4) intrepid; urgency=low
+
+  * Debug must be enabled per file.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 24 Nov 2008 01:01:29 -0200
+
+nx (3.3.0-3-6-0freenxteam3) intrepid; urgency=low
+
+  * Disable input debug it causes build failure
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri, 21 Nov 2008 11:40:55 -0200
+
+nx (3.3.0-3-6-0freenxteam2) intrepid; urgency=low
+
+  * Create patch 90_enable_debug
+  * Forgot to enable 90_set_X0-config_path.dpatch
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri, 21 Nov 2008 11:17:55 -0200
+
+nx (3.3.0-3-6-0freenxteam1) intrepid; urgency=low
+
+  * New upstream release
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Thu, 20 Nov 2008 23:42:40 -0200
+
+ nx (3.2.0-2-10-0ubuntu1) jaunty; urgency=low
+
+  * First upload to Ubuntu.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 17 Nov 2008 17:51:15 -0200
+
+n x (3.2.0-2-10-0freenxteam3) intrepid; urgency=low
+
+  * Correct path of nxagent.keyboard
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 03 Nov 2008 17:49:15 -0200
+
+nx  (3.2.0-2-10-0freenxteam2) intrepid; urgency=low
+
+  * Add nxagent.keyboard to set the default xkb rules to xfree86
+  * Add 90_set_X0-config_path.dpatch to the the location of nxagent.keyboard
+    to /etc/nxagent. Otherwise it would interfere on xnest.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 03 Nov 2008 17:12:40 -0200
+
+nx (3.2.0-2-10-0freenxteam1~ppa2) hardy; urgency=low
+
+  * Uncomment the rules lines
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 02 Sep 2008 19:38:55 -0300
+
+nx (3.2.0-2-10-0freenxteam1~ppa1) hardy; urgency=low
+
+  * Correct version
+  * Update 85_nx-X11_debian-ld.dpatch
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 02 Sep 2008 19:19:43 -0300
+
+nx (3.2.0-2-10-1) hardy; urgency=low
+
+  * New upstream release
+  * Don't ship nxcompext
+  * Change Standards-Version to 3.8.0
+  * Update copyright
+  * Add build-dep on libxcompext-dev
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 02 Sep 2008 18:46:15 -0300
+
+nx (3.2.0-2-1-8-0freenxteam1) intrepid; urgency=low
+
+  * New upstream release
+    * Update nxagent to version 3.2.0-8
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sat, 26 Jul 2008 14:18:58 -0300
+
+nx (3.2.0-2-1-7-0freenxteam1) hardy; urgency=low
+
+  * Change versioning to freenxteamX
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 07 Jul 2008 02:24:27 -0300
+
+nx (3.2.0-2-1-7-0~freenx1) hardy; urgency=low
+
+  * First upload to FreeNX Team PPA.
+  * Merge changelog from Jeremy Wilkins package
+  * Don't rebuild nxcompext, should not be needed anymore.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 06 Jul 2008 20:12:05 -0300
+
+nx (3.2.0-2-1-7-0~freenx0ppa1) hardy; urgency=low
+
+  * New upstream release
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 06 Jul 2008 19:40:30 -0300
+
+nx (3.2.0-1-1-6-0~freenx0~ppa6) hardy; urgency=low
+
+  * Forgot append the -nx to the nxlibs-dev libs
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 06 Jul 2008 18:40:32 -0300
+
+nx (3.2.0-1-1-6-0~freenx0~ppa5) hardy; urgency=low
+
+  * Reupload with the changes
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 06 Jul 2008 17:33:27 -0300
+
+nx (3.2.0-1-1-6-0~freenx0~ppa4) intrepid; urgency=low
+
+  * Revert:
+    - Add patch to don't build unneeded libs.
+    - Add build-dep on libxkbfile-dev
+  * Update 85_nx-X11_debian-ld
+  * Add build-dep on libxext-dev
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 06 Jul 2008 16:46:03 -0300
+
+nx (3.2.0-1-1-6-0~freenx0~ppa3) intrepid; urgency=low
+
+  * Add build-dep on libxkbfile-dev
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sat, 05 Jul 2008 20:07:37 -0300
+
+nx (3.2.0-1-1-6-0~freenx0~ppa2) intrepid; urgency=low
+
+  * Add XS-Vcs-Bzr field.
+  * Update Maintainers field.
+  * Add patch to don't build unneeded libs.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sat, 05 Jul 2008 19:32:29 -0300
+
+nx (3.2.0-1-1-6-0~freenx0~ppa1) intrepid; urgency=low
+
+  * Readd patch to change libs to have suffix -nx (Patch updated by Jeremy
+    Wilkins)
+  * Clean debian/rules
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sat, 05 Jul 2008 16:56:53 -0300
+
+nx (3.2.0-1-1-6-0.14~px) unstable; urgency=low
+
+  * Non-maintainer upload
+  * Uploaded wrong package to PPA
+  * Added Build-Depends: libfreetype6, libxpm4, libxcomposite1
+
+ -- Per Hansen <spamhans@yahoo.de>  Wed, 18 Jun 2008 22:00:00 +0200
+
+nx (3.2.0-1-1-6-0.1~px) unstable; urgency=low
+
+  * Non-maintainer upload
+  * New upstream release: nxagent-3.2.0-6
+  * Fixed lintian warnings
+  ** copyright-without-copyright-notice
+  ** postinst-has-useless-call-to-ldconfig
+  ** binary-without-manpage usr/bin/nxagent
+
+ -- Per Hansen <spamhans@yahoo.de>  Wed, 18 Jun 2008 18:00:00 +0200
+
+nx (3.2.0-1hardy1) hardy; urgency=low
+
+  * New upstream release
+  * Added various patches for NX
+  * Updated package names appropriately
+    - libxcomp2 changed to libxcomp3
+    - libxcompext2 changed to libxcompext3
+  * Still building Hardy packages in Gutsy
+    - Hardy 64bit building fails
+
+ -- Jeremy Wilkins (Jesus Is Lord) <wjeremy@shaw.ca>  Fri, 09 May 2008 15:40:23 -0600
+
+nx (3.2.0-1-1-3-1) hardy; urgency=low
+
+  * New upstream release
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Wed, 09 Apr 2008 22:25:48 +0000
+
+nx (3.1.0-4-7-2-0ppa9) hardy; urgency=low
+
+  * Cleanups
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sat,  5 Apr 2008 06:05:30 -0300
+
+nx (3.1.0-4-7-2-0ppa8) hardy; urgency=low
+
+  * Build-dep on xorg-dev
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 22:30:05 -0300
+
+nx (3.1.0-4-7-2-0ppa7) hardy; urgency=low
+
+  * Remove some libs
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 22:04:36 -0300
+
+nx (3.1.0-4-7-2-0ppa6) hardy; urgency=low
+
+  * Put the libs before the program on control file
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 17:50:46 -0300
+
+nx (3.1.0-4-7-2-0ppa5) hardy; urgency=low
+
+  * Set DEB_DH_SHLIBDEPS_ARGS
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 17:09:35 -0300
+
+nx (3.1.0-4-7-2-0ppa4) hardy; urgency=low
+
+  * Link headers.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 16:01:34 -0300
+
+nx (3.1.0-4-7-2-0ppa3) hardy; urgency=low
+
+  * Remove duplicated Section field on libxcompext-dev
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 11:39:50 -0300
+
+nx (3.1.0-4-7-2-0ppa2) hardy; urgency=low
+
+  * Cleanup
+  * Reintroduce nxcompext
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 09:44:06 -0300
+
+nx (3.1.0-4-7-2-0ppa1) feisty; urgency=low
+
+  * Upload to ppa
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri,  4 Apr 2008 00:21:34 -0300
+
+nx (3.1.0-4-7-2-0ppa0) feisty; urgency=low
+
+  * New upstream release
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Thu,  3 Apr 2008 23:52:26 -0300
+
+nx (3.1.0-3-6-1-0ppa1) feisty; urgency=low
+
+  * New upstream release
+    - Update nxagent to 3.1.0-6
+    - Update nx-X11 to 3.1.0-3
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Wed, 30 Jan 2008 11:27:18 -0200
+
+nx (3.1.0-1-2-1-0ubuntu0ppa1) feisty; urgency=low
+
+  * New upstream release
+  * Version means 3.1.0-(nx-X11)-(nxagent)-(nxauth)
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 16 Dec 2007 12:54:50 -0200
+
+nx (3.1.0-1) UNRELEASED; urgency=low
+
+  * Add handling of nxcl pure ssh mode in nxproxy
+
+ -- Jeremy Wilkins (Jesus Is Lord) <wjeremy@shaw.ca>  Wed, 23 Apr 2008 00:34:00 -0600
+
+nx (3.1.0-0) gutsy; urgency=low
+
+  * New upstream release
+
+ -- Jeremy Wilkins (Jesus Is Lord) <wjeremy@shaw.ca>  Sat, 22 Mar 2008 21:30:00 -0600
+
+nx (3.0.0.2-0ubunt0ppa1) feisty; urgency=low
+
+  * nxlibs-dev is wrong.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 18 Sep 2007 19:38:52 -0300
+
+nx (3.0.0.2-0ubunt0~ppa6) feisty; urgency=low
+
+  * Include libXtst.so, libXrandr.so and libXdamage on nxlibs-dev to make
+    nxcompshad build with nx sources.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 18 Sep 2007 16:47:30 -0300
+
+nx (3.0.0.2-0ubunt0~ppa5) feisty; urgency=low
+
+  * Move lib*.so from usr/NX/lib to usr/lib/nx
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 18 Sep 2007 14:15:34 -0300
+
+nx (3.0.0.2-0ubunt0~ppa4) feisty; urgency=low
+
+  * Build-dep on dpatch
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Tue, 18 Sep 2007 10:02:12 -0300
+
+nx (3.0.0.2-0ubunt0~ppa3) feisty; urgency=low
+
+  * Build against modular libraries
+  * Only use nx-X11, nxagent and nxauth to build nx-X11.
+  * Correct Build-deps
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Mon, 17 Sep 2007 00:56:42 -0300
+
+nx (3.0.0.2-0ubunt0~ppa2) feisty; urgency=low
+
+  * Correct libs versions
+  * Add missing files to -dev packages.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Sun, 16 Sep 2007 10:41:21 -0300
+
+nx (3.0.0.2-0ubunt0~ppa1) feisty; urgency=low
+
+  * New upstream release
+  * Update nx-X11 to -37, nxagent to -85 and nxssh to -15
+  * Change Standards-Version to 3.7.2
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri, 14 Sep 2007 19:41:08 -0300
+
+nx (3.0.0-0ubuntu0~ppa3) feisty; urgency=low
+
+  * Change section on all component to universe.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri, 14 Sep 2007 15:46:21 -0300
+
+nx (3.0.0-0ubuntu0~ppa2) feisty; urgency=low
+
+  * Build-dep on libxrandr-dev.
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri, 14 Sep 2007 14:49:09 -0300
+
+nx (3.0.0-0ubuntu0~ppa1) feisty; urgency=low
+
+  * Create a package for nxcompshad
+  * New upstream release
+
+ -- Marcelo Boveto Shima <marceloshima@gmail.com>  Fri, 14 Sep 2007 11:38:30 -0300
+
+nx (3.0.0-0) gutsy; urgency=low
+
+  * New upstream release
+
+ -- Jeremy Wilkins (Jesus Is Lord) <wjeremy@shaw.ca>  Wed, 19 Oct 2007 23:30:00 -0600
+
+nx (2.1.0-0~seveas2) feisty; urgency=low
+
+  * Fix dependency error
+
+ -- Dennis Kaarsemaker <dennis@blackbird.kaarsemaker.net>  Wed,  2 May 2007 23:27:49 +0200
+
+nx (2.1.0-0~seveas1) feisty; urgency=low
+
+  * New upstream version
+  * Redo packaging:
+    - Get rid of amd64 patches, I have no hope of NX ever bing 64bit safe
+    - New orig.tar.gz that includes the upstream tarballs
+    - Don't build -dev packages
+    - Don't build nxdesktop/nxviewer, they can be built externally
+
+ -- Dennis Kaarsemaker <dennis@blackbird.kaarsemaker.net>  Sun, 22 Apr 2007 22:04:53 +0200
+
+nx (1.4.92+1.5.0-11ubuntu1) UNRELEASED; urgency=low
+
+  * Re-enable nxviewer
+
+ -- Dennis Kaarsemaker <dennis@kaarsemaker.net>  Fri, 12 May 2006 17:35:41 +0200
+
+nx (1.4.92+1.5.0-11) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * hard code xkbcomp locations for the time being, this is not a fix but a
+    first step towards a potential fix, as nx 1.5.0 doesn't cope well with xkb
+    rules and binaries not being below XkbBaseDirectory.
+  * really fix xkb rules location.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 18 Apr 2006 00:49:19 +0200
+
+nx (1.4.92+1.5.0-10) unstable; urgency=low
+
+  * fix xkb and font locations for X.org 7.0/ sid.
+  * minor touch ups.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 13 Apr 2006 00:50:38 +0200
+
+nx (1.4.92+1.5.0-9) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * rebuild against X.org 7.
+  * nxviewer depends on xmkmf which isn't available for X.org 7, so drop it
+    for the time being...
+  * split out nxproxy, we can compile it externally - so do the first step
+    here.
+  * remove build concurrency hacks.
+  * tighten interdependencies, make -dev packages dependend on the binaries
+    again.
+  * link /usr/bin/nxdesktop to /usr/lib/nx/nxdesktop as it is expected there.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 13 Apr 2006 00:49:46 +0200
+
+nx (1.4.92+1.5.0-8) experimental; urgency=low
+
+  * upstream introduced conditional -fPIC usage for amd64, but according to
+    debian policies and good practices we still stick unconditionally to -fPIC
+    for libxcomp and libxcompext.
+  * clean up debian specific build patches.
+  * fix clean target, this needs further fixing so better treat this as
+    broken.
+  * re- add concurrency level for make.
+  * adapt spelling fixes for debian/control contributed by Blair Zajac.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed,  4 Jan 2006 12:15:06 +0100
+
+nx (1.4.92+1.5.0-7) experimental; urgency=low
+
+  * fix FTBS introduced in nxcompext/Makefile.in, re- introduce
+    41_nxcompext_debian-ld.diff.
+  * fix build-dependencies.
+  * remove artificial dependencies from -dev packages.
+  * optimize clean target.
+  * prune automatically created files from 00_maintenance_release_3s.diff,
+    autoreconf is mandatory!
+  * packaging clean up.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 20 Dec 2005 16:59:40 +0100
+
+nx (1.4.92+1.5.0-6) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * update to "Third Maintenance Release of the NX 1.5.0 Server Packages",
+    2005-12-13:
+    - Resuming OpenGL-based 3D applications running in an X11 session may show
+      windows with no content.
+    - The keyboard doesn't work properly when an X11 session is migrated from
+      a x86 platform to Mac OS X and vice versa.
+    - The X11 agent may crash when the proxy on the client side disconnects.
+    - Floating X11 sessions may shut down unexpectedly when minimized
+      applications are still running.
+    - Sudden disconnection of a rootless X11 session when saving an
+      unreachable link with Konqueror.
+    - Double redraw of the NoMachine splash screen at  RDP session startup.
+    - Buggy display of scroll-bar patterns in the OpenOffice application run
+      inside a RDP full-color session.
+  * 00_maintenance_release_3s.diff:
+    * nxagent-1.5.0-112
+    * nxcomp-1.5.0-80
+    * nxcompext-1.5.0-20
+    - nxproxy-1.5.0-9
+    * nxviewer-1.5.0-15
+    * nxdesktop-1.5.0-78
+    * nx-X11-1.5.0-21
+  * bump compat level to 5.    
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 14 Dec 2005 11:33:23 +0100
+
+nx (1.4.92+1.5.0-5) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * update to maintenance release 3 for nx 1.5.0, 2005-11-30:
+    - Copy&Paste from Windows to a X11 session may fail with OpenOffice.
+    - Incorrect deal of the keyboard when the Shift key is kept pressed in a
+      X11 session.
+    - Possible X server failure at startup when NX client is running in plugin
+      mode on Mac OSX.
+    - The nxcomp component fails to compile with GCC 4.
+  * 00_maintenance_release_3c.diff:
+    - incorporate 20_nxauth_remove-source.diff here.
+    - nxagent-1.5.0-93
+    * nxcomp-1.5.0-78
+    * nxcompext-1.5.0-18
+    - nxproxy-1.5.0-9
+    - nxviewer-1.5.0-14
+    - nxdesktop-1.5.0-75
+    * nx-X11-1.5.0-18
+  * clean up build dependencies.
+  * adapt get-orig-source path.
+  * 30_nxcomp-gcc4-buildfix.diff is still necessary.
+  * drop 41_nxcompext_debian-ld.diff due to upstream changes.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun,  4 Dec 2005 13:28:08 +0100
+
+nx (1.4.92+1.5.0-4) experimental; urgency=low
+
+  * update to maintenance release 2 for nx 1.5.0, 2005-10-06:
+    - Solved problems related to the minimizing and the refresh of windows and
+      cursor shapes when reconnecting a seamless session.
+    - Solved the unreliable behaviour when running IntelliJ, BeanShell, Wine,
+      PerlTK and XView applications in seamless sessions.
+    - Fixed the bugs arising when resizing the RDP agent's window.
+    - Solved the incorrect handling of some X11 agent options, like the
+      'norender', 'slow' and 'fast' options that may be specified in the NX
+      server configuration.
+    - Fixed problems with the CUPS backend on AMD64 architectures.
+    - Improved detection of session status in the case of abnormal session
+      terminations.
+  * 00_maintenance_release_2.diff:
+    - incorporate 20_nxauth_remove-source.diff here.
+    * nxagent-1.5.0-93
+    - nxcomp-1.5.0-65
+    - nxcompext-1.5.0-16
+    - nxproxy-1.5.0-9
+    - nxviewer-1.5.0-14
+    * nxdesktop-1.5.0-75
+    - nx-X11-1.5.0-15
+  * remove the seperate 20_nxauth_remove-source.diff and
+    22_nxauth_remove-version.diff (include it directly in
+    00_maintenance_release_2.diff).
+  * enforced libssl0.9.8 transition.
+  * fix sections.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri,  7 Oct 2005 01:43:37 +0200
+
+nx (1.4.92+1.5.0-3) experimental; urgency=low
+
+  * compile nxcompext with -fPIC, thanks to Florian Hars for noticing.
+  * add nxlibs-dev.
+  * remodel patches to ease up splitting into upstream tarballs.
+  * remove nxauth from source.
+  * borrow/ adapt OpenSuSE patches:
+   - 21_nxauth_dont-compile.diff
+   - 32_ncomp_ia64.diff
+   - 50_nxdesktop_no-get_rdp_windows.diff
+   - 80_nx-x11_fix-bufferoverflow.diff
+   - 81_nx-x11_data-range.diff
+   - 82_nx-x11_ppc-no-signed-char.diff
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 31 Aug 2005 13:43:02 +0200
+
+nx (1.4.92+1.5.0-2) experimental; urgency=low
+
+  * update to maintenance release 1 for nx 1.5.0, 2005-08-17:
+    - Improvements in NX server's methods to verify the validity of the
+      configuration parameters.
+    - Fixed printing jobs hangs when printing from remote server.
+    - Improvements to handling of expose events.
+    - Disabled some logs left in the X11 agent.
+  * 00_maintenance_release_1.diff:
+      * nxagent-1.5.0-90
+      - nxauth-1.5.0-1
+      - nxcomp-1.5.0-65
+      - nxcompext-1.5.0-16
+      - nxproxy-1.5.0-9
+      - nxviewer-1.5.0-14
+      * nxdesktop-1.5.0-61
+      - nx-X11-1.5.0-15
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 17 Aug 2005 21:39:56 +0200
+
+nx (1.4.92+1.5.0-1) experimental; urgency=low
+
+  * revert to monolithic build:
+    - add nxdesktop again.
+    - add nxviewer again.
+    - add nxssh temporarily.
+  * minor clean-up.
+  * add clean target.
+  * tag for experimental.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 17 Aug 2005 00:56:25 +0200
+
+nx (1.4.91+1.5.0-3) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * fix header collision
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 15 Aug 2005 18:25:36 +0200
+
+nx (1.4.91+1.5.0-2) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * add more headers to -dev packages.
+  * create nxagent-dev.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 15 Aug 2005 13:47:12 +0200
+
+nx (1.4.91+1.5.0-1) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * add headers to -dev packages.
+  * fix dependecies for -dev packages.
+  * fix shlib definitions.
+  * overhaul -fPIC patches.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 15 Aug 2005 01:18:32 +0200
+
+nx (1.4.91+1.5.0-0) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * remove nxdesktop, nxssh and nxviewer from upstream tarball.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 14 Aug 2005 19:23:03 +0200
+
+nx (1.4.90.2+1.5.0-0) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET)
+  * recreate from broken svn checkout.
+  * clean up debian/rules.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 13 Aug 2005 00:40:42 +0200
+
+nx (1.4.90.21+1.5.0-0) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET) New upstream release
+    - nxagent-1.5.0-87
+    - nxauth-1.5.0-1
+    * nxcomp-1.5.0-65
+    - nxcompext-1.5.0-16
+    - nxproxy-1.5.0-9
+    - nxviewer-1.5.0-14
+    - nxdesktop-1.5.0-59
+    * nxssh-1.5.0-21
+    - nx-X11-1.5.0-15
+  * create a seperate nxlibs-dev package (again).
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 13 Aug 2005 00:32:38 +0200
+
+nx (1.4.90+1.5.0-0) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET) New upstream release
+    * nxagent-1.5.0-87
+    - nxauth-1.5.0-1
+    * nxcomp-1.5.0-63
+    * nxcompext-1.5.0-16
+    * nxproxy-1.5.0-9
+    * nxviewer-1.5.0-14
+    * nxdesktop-1.5.0-59
+    * nxssh-1.5.0-19
+    * nx-X11-1.5.0-15
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 11 Aug 2005 02:26:31 +0200
+
+nx (1.4.89+1.5.0snapshot4-0a1) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET) New upstream release
+    * nxagent-1.5.0-61
+    - nxauth-1.5.0-1
+    * nxcomp-1.5.0-51
+    * nxcompext-1.5.0-14
+    * nxproxy-1.5.0-8
+    * nxviewer-1.5.0-9
+    * nxdesktop-1.5.0-52
+    - nxssh-1.5.0-16
+    * nx-X11-1.5.0-14
+  * conflict with libxcomp0, libxcompext0.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 11 Aug 2005 01:54:05 +0200
+
+nx (1.4.89+1.5.0snapshot3-0a1) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET) New upstream release
+  * add libselinux1-dev to build-deps.
+  * gcc-4.0/ X.org transition.
+  * fix compilation on x86_64.
+  * fix soname for nxcomp and nxcompext.
+    - rename libnxcomp0 to libxcomp1.
+    - rename libnxcompext0 to libxcompext1.
+  * remove nxdesktop (RDP Support) for testing purposes.
+  * remove nxviewer (VNC Support) for testing purposes.
+  * fix smaller errors.
+  * bump standards version.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 10 Aug 2005 23:53:45 +0200
+
+nx (1.4.89+1.5.0snapshot3-0) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET) New upstream release
+  * port to 1.5.0 snapshot 3:
+    - nxagent-1.5.0-45
+    - nxauth-1.5.0-1
+    - nxcomp-1.5.0-40
+    - nxcompext-1.5.0-11
+    - nxproxy-1.5.0-7
+    - nxviewer-1.5.0-5
+    - nxdesktop-1.5.0-49
+    - nxssh-1.5.0-16
+    - nx-X11-1.5.0-9
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 27 Jun 2005 23:25:13 +0200
+
+nx (1.4.89+1.5.0snapshot2-0) UNRELEASED; urgency=low
+
+  * (NOT RELEASED YET) New upstream release
+  * experimental snapshot.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu,  9 Jun 2005 12:03:00 +0200
+
+nx (1.4.0.2-0alpha4) experimental; urgency=low
+
+  * fix linker regressions.
+  * fix 64 bit linker problems. 
+  * fix dpkg-shlibdeps complaints.
+  * revert modular source approach for now.
+  * fix FSSTND vs. FHS clashed in nxdesktop.
+  * move prefix to /usr/lib/nx.
+  * adapt get-orig-source to current NoMachine URLs.
+  * add experimental x86_64 patch, also fixes potential buffer overflow on
+    other 64 bit architectures.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 29 May 2005 21:27:10 +0200
+
+nx (1.4.0.2-0alpha3) experimental; urgency=low
+
+  * adapt SuSE build process. 
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 26 Apr 2005 11:47:19 +0200
+
+nx (1.4.0.2-0alpha2) experimental; urgency=low
+
+  * revert to /usr/bin/, due to serious compatibility problems with freenx. 
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 25 Apr 2005 11:25:10 +0200
+
+nx (1.4.0.2-0alpha1) experimental; urgency=low
+
+  * create new orig.tar.gz
+  * rename nxlibs to libnx.
+  * add VERSION listing to get-orig-source.
+  * fix nxssh.install.
+  * fix nxviewer.install.
+  * restructure patches.
+  * switch to simple patchsys.
+  * revise get-orig-source (formally download target).
+  * remove nxtunnnel-*.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 24 Apr 2005 12:41:02 +0200
+
+nx (1.4.0-m2-2) experimental; urgency=low
+
+  * fix lintian errors.
+  * add nxlibs-dev and libnxcomp0-dev.
+  * limit architectures to known good ones i386, ppc.
+  * adapt "debian/rules download" to actually download the release sources
+    from nomachine.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 17 Apr 2005 14:50:35 +0200
+
+nx (1.4.0-m2-1) experimental; urgency=low
+
+  * new upstream maintenance release (2):
+    * "ROME, Italy, February 10th, 2004 - NoMachine announces a new
+      maintenance release of NX 1.4.0."
+      http://www.nomachine.com/news_read.php?idnews=138
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 11 Feb 2005 18:13:09 +0100
+
+nx (1.4.0-m1-1) experimental; urgency=low
+
+  * New Maintenance Release (1) of NX 1.4.0 Client and Server Packages.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 25 Dec 2004 18:44:45 +0100
+
+nx (1.4.0-final-1) experimental; urgency=low
+
+  * preliminary naming scheme.
+  * merge new upstream release.
+  * remove nxcompsh.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 25 Nov 2004 21:41:14 +0100
+
+nx (1.4.0-6-3) experimental; urgency=low
+
+  * Fix build dependencies (hopefully).
+  * Fix typo xbase-fonts -> xfonts-base
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue, 26 Oct 2004 15:18:34 +0200
+
+nx (1.4.0-6-2) experimental; urgency=low
+
+  * Argh. Not a native package. Again.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue, 19 Oct 2004 10:02:20 +0200
+
+nx (1.4.0-6-1) experimental; urgency=low
+
+  * Sync up with Stefan Lippers-Hollmann <s.l-h@gmx.de>
+    - add experimental AMD64/ PPC64 support
+    - add missing build-deps
+  * New versioning scheme (1.4.0-<snapshot>-<revision>).
+  * Grab new nomachine snapshot.
+  * Simplify package maintenance a bit.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue, 19 Oct 2004 10:02:14 +0200
+
+nx (1.3.99.2-3) experimental; urgency=low
+
+  * Add replaces: nxagent (<< 1.3.99.2-2) to nxlibs; fixes upgrade.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Thu, 16 Sep 2004 23:51:20 +0200
+
+nx (1.3.99.2-2) experimental; urgency=low
+
+  * Ouch! Not a native package...
+  * Another ouch, remove _old/ tarballs
+  * Last ouch, update clean target to remove new builddirs
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue, 14 Sep 2004 17:23:39 +0200
+
+nx (1.3.99.2-1) experimental; urgency=low
+
+  * Include nxdesktop and nxviewer.
+  * Split out nxlibs.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue, 14 Sep 2004 16:04:39 +0200
+
+nx (1.3.99.2-0) experimental; urgency=low
+
+  * New 1.4 snapshot.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Fri, 10 Sep 2004 12:15:07 +0200
+
+nx (1.3.99.1-0pre1) experimental; urgency=low
+
+  * Update nxagent and nxssh to current snapshots.
+  * Recompress the tarballs with bzip2
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue,  6 Jul 2004 10:48:59 +0200
+
+nx (1.3.99-0pre3) experimental; urgency=low
+
+  * Implement nxtunnel and add 2 new packages: nxtunnel-server and
+    nxtunnel-client. See README.Debian in those packages for use instructions.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Fri, 25 Jun 2004 16:29:59 +0200
+
+nx (1.3.99-0pre2) experimental; urgency=low
+
+  * Fix nxproxy depends (had a typo in it... sorry for inconvenience), thanks
+    to Isaac Clerencia <isaac@sindominio.net> for spotting.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Wed, 23 Jun 2004 23:07:55 +0200
+
+nx (1.3.99-0pre1) experimental; urgency=low
+
+  * Change lib sonames, so they can reside in /usr/lib as per FHS; change
+    linking of nxagent appropriately.
+  * Fix dependency breakage (libnxcompext0 does not depend on nxagent and
+    nxproxy depends on libnxcomp*)
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Tue, 22 Jun 2004 14:47:12 +0200
+
+nx (1.3.99-0pre0) experimental; urgency=low
+
+  * Initial packaging.
+
+ -- Peter Rockai (mornfall) <mornfall@danill.sk>  Mon, 21 Jun 2004 23:24:35 +0200
+
