@@ -1,3 +1,4 @@
+
 #!/usr/bin/make -f
 
 DEB_DH_SHLIBDEPS_ARGS := -ldebian/libnx-xorg/usr/lib/nx
@@ -8,6 +9,10 @@ ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 else
         CFLAGS += -O2
 endif
+
+CFLAGS += -Iextensions/
+
+
 
 %:
 	dh $@
@@ -24,7 +29,7 @@ override_dh_auto_build:
 	cd nx-X11 && $(MAKE) World
 
 	find -L . -name '*.so.*'  | xargs strip -v --strip-unneeded
-
+cd ..
 	# convert symlinks to real files
 	mkdir -p debian/libnx-xorg-dev.tmp
 	cp -RL nx-X11/exports/include debian/libnx-xorg-dev.tmp/ || true
