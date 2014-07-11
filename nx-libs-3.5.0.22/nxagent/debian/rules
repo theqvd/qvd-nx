@@ -11,7 +11,7 @@ override_dh_auto_build:
 		echo "Injecting NXAgent into tree" && \
 	        cp -r programs/Xserver/hw/nxagent nx-X11/programs/Xserver/hw/ 
 	# build the nx core
-
+	cd nx-X11/config/makedepend/ && $(MAKE)  && cd
 	cd nxcomp && autoreconf -fi && ./configure && cd .. 
 	cd nxcompext && autoreconf -fi && ./configure && cd ..
 	cd nxcompshad && autoreconf -fi && ./configure && cd .. 
