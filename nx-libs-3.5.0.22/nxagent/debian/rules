@@ -1,4 +1,3 @@
-
 #!/usr/bin/make -f
 
 DEB_DH_SHLIBDEPS_ARGS = -ldebian/libnx-xorg/usr/lib/nx
