@@ -3,16 +3,6 @@
 
 DEB_DH_SHLIBDEPS_ARGS := -ldebian/libnx-xorg/usr/lib/nx
 
-CFLAGS = -Wall -g
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-        CFLAGS += -O0
-else
-        CFLAGS += -O2
-endif
-
-CFLAGS += -Iextensions/
-
-
 
 %:
 	dh $@
