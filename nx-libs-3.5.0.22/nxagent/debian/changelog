@@ -1,3 +1,9 @@
+qvd-nxagent (3.5.0-22build-jenkins) precise; urgency=low
+
+  * Updating Version to proper 3.5.0-22
+
+ -- Quality Virtual Desktop (Clave de QVD) <jenkins@qvd-precise-32-dev.int.qindel.com>  Mon, 14 Jul 2014 09:03:04 +0000
+
 qvd-nxagent (3.5.0-2build4) precise; urgency=low
 
   * Testing to include ../nx in nxcompshad  
