@@ -91,7 +91,7 @@ RM_DIR          = rmdir -p --ignore-fail-on-non-empty
 #
 
 MAKEDEPEND     = @MAKEDEPEND@
-DEPENDINCLUDES = -I/usr/include/g++ -I/usr/include/g++-3 -I../nx-X11/include
+DEPENDINCLUDES = -I/usr/include/g++ -I/usr/include/g++-3
 
 .SUFFIXES: .cpp.c
 
