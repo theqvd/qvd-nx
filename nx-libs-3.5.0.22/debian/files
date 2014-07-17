@@ -1,0 +1,13 @@
+qvd-libnx-x11_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-libnx-x11-dev_3.5.0-22build-jenkins_i386.deb libdevel extra
+qvd-libnx-mesa-extras-dev_3.5.0-22build-jenkins_i386.deb libdevel extra
+qvd-nxagent_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-nxproxy_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-nxauth_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-libxcomp3_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-libxcomp-dev_3.5.0-22build-jenkins_i386.deb libdevel extra
+qvd-libxcompext3_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-libxcompext-dev_3.5.0-22build-jenkins_i386.deb libdevel extra
+qvd-libxcompshad3_3.5.0-22build-jenkins_i386.deb x11 extra
+qvd-libxcompshad-dev_3.5.0-22build-jenkins_i386.deb libdevel extra
+qvd-nx-x11-dbg_3.5.0-22build-jenkins_i386.deb debug extra

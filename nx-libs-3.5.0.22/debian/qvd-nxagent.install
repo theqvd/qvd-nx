@@ -1,0 +1,5 @@
+nx-X11/programs/Xserver/nxagent                usr/lib/nx/bin
+bin/nxagent                                    usr/bin
+debian/rgb                                     usr/share/nx
+nx-X11/programs/Xserver/hw/nxagent/nxagent.xpm usr/share/pixmaps
+etc/nxagent/keystrokes.cfg

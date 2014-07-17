@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+CFLAGS = -Wall -g
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+        CFLAGS += -O0
+else
+        CFLAGS += -O2
+endif
+
+%:
+	CONFIGURE="./configure --prefix=/usr" LD_LIBRARY_PATH=`pwd`/debian/qvd-libnx-x11/usr/lib/nx/X11:$$LD_LIBRARY_PATH dh $@ 
+
+override_dh_auto_clean:
+	rm -Rf nx-X11/.build-exports
+	LD_LIBRARY_PATH=`pwd`/debian/qvd-libnx-x11/usr/lib/nx/X11:$$LD_LIBRARY_PATH dh_auto_clean
+
+
+override_dh_auto_install:
+	PREFIX=/usr dh_auto_install -Smakefile
+
+override_dh_clean:
+	rm -f nx*/configure
+	rm -f nx*/changelog
+	rm -f nx-X11/programs/Xserver/hw/nxagent/changelog
+	rm -f nx-X11/programs/nxauth/changelog
+	rm -Rf replace.sh Makefile bin rgb VERSION.x2goagent etc/keystrokes.cfg
+	dh_clean
+
+override_dh_auto_build:
+
+	# create copies of upstream changelogs so that names apply to Debian policy...
+	cp -a nx-X11/CHANGELOG nx-X11/changelog
+	cp -a nxcomp/CHANGELOG nxcomp/changelog
+	cp -a nxcompext/CHANGELOG nxcompext/changelog
+	cp -a nxcompshad/CHANGELOG nxcompshad/changelog
+	cp -a nx-X11/programs/Xserver/hw/nxagent/CHANGELOG nx-X11/programs/Xserver/hw/nxagent/changelog
+	cp -a nx-X11/programs/nxauth/CHANGELOG nx-X11/programs/nxauth/changelog
+	cp -a nxproxy/CHANGELOG nxproxy/changelog
+	ln -s debian/Makefile.nx-libs Makefile
+	ln -s debian/Makefile.replace.sh replace.sh
+	ln -s debian/wrappers bin
+	mkdir -p etc/
+	ln -s ../debian/keystrokes.cfg etc/keystrokes.cfg
+	ln -s debian/rgb
+	ln -s debian/VERSION.x2goagent
+
+	# remove bundled libraries (keep this in sync with roll-tarball.sh)
+	rm -Rf nx-X11/extras/{drm,expat,fontconfig,freetype2,fonts,ogl-sample,regex,rman,ttf2pt1,x86emu,zlib}
+	rm -Rf nx-X11/lib/{expat,fontconfig,fontenc,font/FreeType,font/include/fontenc.h,freetype2,regex,zlib}
+	rm -Rf nx-X11/lib/{FS,ICE,SM,Xaw,Xft,Xt,Xmu,Xmuu}
+
+	LD_LIBRARY_PATH=`pwd`/debian/libnx-x11/usr/lib/nx/X11:$$LD_LIBRARY_PATH dh_auto_build --parallel
+
+override_dh_strip:
+	dh_strip --dbg-package=qvd-nx-x11-dbg

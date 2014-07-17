@@ -1,0 +1,118 @@
+Description: Enable locale support
+ Enable locale support in nxagent.
+ .
+ Originally contributed by FreeNX Team (dimbor).
+Forwarded: not-yet
+Author: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+Last-Update: 2011-12-31
+--- a/nx-X11/programs/Xserver/hw/nxagent/Init.c
++++ b/nx-X11/programs/Xserver/hw/nxagent/Init.c
+@@ -64,6 +64,9 @@
+ #include "NX.h"
+ #include "NXlib.h"
+ 
++/* by dimbor */
++#include <X11/Xlocale.h>
++
+ /*
+  * Set here the required log level.
+  */
+@@ -366,6 +369,20 @@
+    */
+ 
+   blackRoot = TRUE;
++
++  /* by dimbor */
++  char *locale = setlocale(LC_ALL, "");
++  if (!locale)
++   fprintf(stderr, "InitOutput: failed to set locale, reverting to \"C\"\n");
++  else
++  {
++    if (!XSupportsLocale())
++      fprintf(stderr, "InitOutput: Locale %s not supported by X\n",locale);
++    else
++      fprintf(stderr, "InitOutput: Set %s locale\n",locale);
++  }
++  if (!XSetLocaleModifiers(""))
++         fprintf(stderr,"InitOutput: cannot set locale modifiers.\n");
+ }
+ 
+ void InitInput(argc, argv)
+--- a/nx-X11/programs/Xserver/hw/nxagent/Rootless.c
++++ b/nx-X11/programs/Xserver/hw/nxagent/Rootless.c
+@@ -32,6 +32,10 @@
+ 
+ #include "NXlib.h"
+ 
++/* by dimbor */
++#include "Xatom.h"
++#include <X11/Xlocale.h>
++
+ /*
+  * Set here the required log level.
+  */
+@@ -419,6 +423,28 @@
+   }
+ }
+ 
++/* by dimbor */
++char *textToUTF8String(char *text, int nitems)
++{
++  XTextProperty t_prop;
++  char *ret=NULL;
++  t_prop.value=((unsigned char *)text);
++  t_prop.nitems=nitems;
++  if (!t_prop.nitems)
++    return ret;
++  t_prop.format=8;
++  t_prop.encoding=XInternAtom(nxagentDisplay, "COMPOUND_TEXT", 0);
++  char **list;
++  int num;
++  int r = Xutf8TextPropertyToTextList(nxagentDisplay, &t_prop,&list, &num);
++  if ((r == Success || r > 0) && num > 0 && *list)
++  {
++    ret=(char *)strdup (*list);
++    XFreeStringList(list);
++  }
++  return ret;
++}
++
+ int nxagentExportAllProperty(pWin)
+   WindowPtr pWin;
+ {
+@@ -464,6 +490,7 @@
+ 
+   if (strncmp(propertyS, "WM_", 3) != 0 &&
+           strncmp(propertyS, "_NET_", 5) != 0 &&
++          strncmp(propertyS, "_MOTIF_", 7) != 0 &&
+               strcmp(propertyS, "_KDE_NET_WM_SYSTEM_TRAY_WINDOW_FOR") != 0)
+   {
+     #ifdef TEST
+@@ -474,6 +501,7 @@
+     #endif
+   }
+   else if (strcmp(typeS, "STRING") == 0 ||
++             strcmp(typeS, "_MOTIF_WM_HINTS") == 0 ||
+                #ifndef _XSERVER64
+                strcmp(typeS, "CARDINAL") == 0 ||
+                    strcmp(typeS, "WM_SIZE_HINTS") == 0 ||
+@@ -483,6 +511,19 @@
+     output = value;
+     export = True;
+   }
++  /* add by dimbor, modified by Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
++  else if (strcmp(typeS, "COMPOUND_TEXT") == 0)
++  {
++    output = textToUTF8String(value, nUnits);
++    if ( output != NULL ) {
++      type = MakeAtom("UTF8_STRING", strlen("UTF8_STRING"), True);
++    } else {
++      output = value;
++    }
++    nUnits = strlen((char *) output);
++    freeMem = True;
++    export = True;
++  } */
+   #ifdef _XSERVER64
+   else if (strcmp(typeS, "CARDINAL") == 0 || strcmp(typeS, "WM_SIZE_HINTS") == 0)
+   {
