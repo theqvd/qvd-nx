@@ -224,7 +224,7 @@ AC_SUBST(VERSION)
 if test "${with_version}" = yes; then
   VERSION=${ac_option}
 else
-  VERSION=`cat VERSION | tr -d '\r\n'`
+  VERSION=`cat VERSION`
 fi
 echo -e "compiling version ${VERSION}"
 
