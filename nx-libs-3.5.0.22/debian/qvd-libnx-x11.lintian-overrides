@@ -1,0 +1,4 @@
+qvd-libnx-x11: possible-new-upstream-release-without-new-version
+qvd-libnx-x11: postinst-has-useless-call-to-ldconfig
+qvd-libnx-x11: postrm-has-useless-call-to-ldconfig
+qvd-libnx-x11: debian-revision-should-not-be-zero

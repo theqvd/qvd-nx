@@ -1,0 +1,6 @@
+nx-libs (3.5.0-22build-jenkins) precise; urgency=low
+
+  * Initial release. 
+  * Port to qvd-nx from x2go git
+
+ -- Quality Virtual Desktop (Clave de QVD) <qvd@qindel.com>  Wed, 16 Jul 2014 13:34:25 +0000

@@ -1,0 +1,2 @@
+shlibs:Depends=libc6 (>= 2.4), libjpeg8 (>= 8c), libpng12-0 (>= 1.2.13-4), qvd-libnx-x11, qvd-libxcomp3, zlib1g (>= 1:1.1.4)
+misc:Depends=
