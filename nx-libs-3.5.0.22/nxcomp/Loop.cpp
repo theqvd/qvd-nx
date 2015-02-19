@@ -4183,7 +4183,7 @@ int SetupDisplaySocket(int &xServerAddrFamily, sockaddr *&xServerAddr,
 
   #ifdef __APPLE__
 
-  if (strncasecmp(display, "/tmp/launch", 11) == 0)
+  if ((strncasecmp(display, "/tmp/launch", 11) == 0) || (strstr(display, "launchd") != NULL))
   {
     #ifdef TEST
     *logofs << "Loop: Using launchd service on socket '"
