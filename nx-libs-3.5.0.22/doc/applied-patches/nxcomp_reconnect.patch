@@ -1,0 +1,72 @@
+diff --git a/nxcomp/Loop.cpp b/nxcomp/Loop.cpp
+index 92b6fc2..f6dfe36 100644
+--- a/nxcomp/Loop.cpp
++++ b/nxcomp/Loop.cpp
+@@ -1310,6 +1310,11 @@ void NXTransCleanup()
+   HandleCleanup();
+ }
+ 
++void NXTransCleanupForReconnect()
++{
++  HandleCleanupForReconnect();
++}
++
+ //
+ // Check the parameters for subsequent
+ // initialization of the NX transport.
+@@ -4820,6 +4825,24 @@ int StartKeeper()
+   return 1;
+ }
+ 
++void HandleCleanupForReconnect()
++{
++  #ifdef TEST
++  *logofs << "Loop: Going to clean up system resources for Reconnect "
++          << "in process '" << getpid() << "'.\n"
++          << logofs_flush;
++  #endif
++  handleTerminatedInLoop();
++  DisableSignals();
++  CleanupChildren();
++  CleanupListeners();
++  CleanupSockets();
++  CleanupGlobal();
++  RestoreSignals();
++  CleanupLocal();
++  CleanupStreams();
++  ServerCache::lastInitReply.set(0,NULL);
++}
+ void HandleCleanup(int code)
+ {
+   #ifdef TEST
+diff --git a/nxcomp/Misc.h b/nxcomp/Misc.h
+index 2008317..3804bd3 100644
+--- a/nxcomp/Misc.h
++++ b/nxcomp/Misc.h
+@@ -132,6 +132,7 @@ void HandleShutdown() __attribute__((noreturn));
+ extern "C"
+ {
+   void HandleCleanup(int code = 0) __attribute__((noreturn));
++  void HandleCleanupForReconnect();
+ }
+ 
+ //
+diff --git a/nxcomp/NX.h b/nxcomp/NX.h
+index d98af79..79ba7f4 100644
+--- a/nxcomp/NX.h
++++ b/nxcomp/NX.h
+@@ -442,6 +442,14 @@ extern int NXTransParseEnvironment(const char *env, int force);
+ 
+ extern void NXTransCleanup(void) __attribute__((noreturn));
+ 
++/*
++ * Cleans up the global and local state
++ * (the same way as NXTransCleanup does)
++ * but does not exit the process
++ * Needed for IOS platform
++ */
++extern void NXTransCleanupForReconnect(void);
++
+ #ifdef __cplusplus
+ }
+ #endif
