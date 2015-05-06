@@ -4849,6 +4849,8 @@ void HandleCleanupForReconnect()
   #endif
   handleTerminatedInLoop();
   DisableSignals();
+  if (control)
+    CleanupChildren();
   CleanupListeners();
   CleanupSockets();
   CleanupKeeper();
