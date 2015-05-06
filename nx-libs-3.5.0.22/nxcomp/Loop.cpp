@@ -705,7 +705,7 @@ static void handleNegotiationInLoop(int &setFDs, fd_set &readSet,
 // Print the 'terminating' messages in the
 // session log.
 //
- 
+
 static inline void handleTerminatingInLoop();
 static inline void handleTerminatedInLoop();
 
@@ -1025,25 +1025,25 @@ int diffTs;
 
 //
 // This is set to the main proxy process id.
-// 
+//
 
 int lastProxy = 0;
 
 //
 // Set to last dialog process launched by proxy.
-// 
+//
 
 int lastDialog = 0;
 
 //
 // Set to watchdog process launched by proxy.
-// 
+//
 
 int lastWatchdog = 0;
 
 //
 // Set if a cache house-keeper process is running.
-// 
+//
 
 int lastKeeper = 0;
 
@@ -1076,7 +1076,7 @@ static int lastDestroy = 0;
 //
 // This is set to the code and local flag of the
 // last requested alert.
-// 
+//
 
 static struct
 {
@@ -1153,7 +1153,7 @@ int NXTransProxy(int fd, int mode, const char* options)
     *logofs << "NXTransProxy: Out of the long jump with pid '"
             << lastProxy << "'.\n" << logofs_flush;
     #endif
-    
+
     return -1;
   }
 
@@ -3390,7 +3390,7 @@ int SetupProxyConnection()
       }
 
       #ifdef TEST
-      *logofs << "Loop: Going to wait for connection on port " 
+      *logofs << "Loop: Going to wait for connection on port "
               << listenPort << ".\n" << logofs_flush;
       #endif
 
@@ -4849,12 +4849,12 @@ void HandleCleanupForReconnect()
   #endif
   handleTerminatedInLoop();
   DisableSignals();
-  CleanupChildren();
   CleanupListeners();
   CleanupSockets();
   CleanupGlobal();
   RestoreSignals();
   CleanupLocal();
+  CleanupKeeper();
   CleanupStreams();
   ServerCache::lastInitReply.set(0,NULL);
 }
@@ -4881,7 +4881,7 @@ void HandleCleanup(int code)
     //
 
     CleanupChildren();
-  
+
     //
     // Close all listeners.
     //
@@ -5121,7 +5121,7 @@ void CleanupChildren()
     #endif
 
     KillProcess(control -> KillDaemonOnShutdown[i], "daemon", SIGTERM, 0);
-  }    
+  }
 }
 
 void CleanupGlobal()
@@ -6713,7 +6713,7 @@ int WaitForRemote(int portNum)
   // Quick patch to run on MacOS/X where inet_addr("127.0.0.1")
   // alone seems to fail to return a valid interface. It probably
   // just needs a htonl() or something like that.
-  // 
+  //
   // TODO: We have to give another look at inet_addr("127.0.0.1")
   // on the Mac.
   //
@@ -6825,7 +6825,7 @@ int WaitForRemote(int portNum)
 
         continue;
       }
- 
+
       #ifdef PANIC
       *logofs << "Loop: PANIC! Call to select failed. Error is "
               << EGET() << " '" << ESTR() << "'.\n"
@@ -6966,7 +6966,7 @@ int ConnectToRemote(const char *const hostName, int portNum)
   }
 
   #ifdef TEST
-  *logofs << "Loop: Connecting to remote host '" 
+  *logofs << "Loop: Connecting to remote host '"
           << hostName << ":" << portNum << "'.\n"
           << logofs_flush;
   #endif
@@ -7072,7 +7072,7 @@ int ConnectToRemote(const char *const hostName, int portNum)
       else
       {
         #ifdef TEST
-        *logofs << "Loop: Sleeping " << retryTimeout 
+        *logofs << "Loop: Sleeping " << retryTimeout
                 << " Ms before retrying.\n"
                 << logofs_flush;
         #endif
@@ -8040,13 +8040,13 @@ int ReadRemoteData(int fd, char *buffer, int size, char stop)
 
   #ifdef PANIC
   *logofs << "Loop: PANIC! Stop character missing "
-          << "from FD#" << fd << " after " << remotePosition 
+          << "from FD#" << fd << " after " << remotePosition
           << " characters read in string '" << remoteData
           << "'.\n" << logofs_flush;
   #endif
 
   cerr << "Error" << ": Stop character missing "
-       << "from FD#" << fd << " after " << remotePosition 
+       << "from FD#" << fd << " after " << remotePosition
        << " characters read in string '" << remoteData
        << "'.\n";
 
@@ -8080,7 +8080,7 @@ int WriteLocalData(int fd, const char *buffer, int size)
     ret = select(fd+1, NULL, &writeSet, NULL, &selectTs);
 
     #ifdef DEBUG
-    *logofs << "Loop: WriteLocalData: select() returned with a code of " << ret << " and remaining timeout of " 
+    *logofs << "Loop: WriteLocalData: select() returned with a code of " << ret << " and remaining timeout of "
             << selectTs.tv_sec << " sec, " << selectTs.tv_usec << "usec\n" << logofs_flush;
     #endif
 
@@ -8161,7 +8161,7 @@ int ParseEnvironmentOptions(const char *env, int force)
             << "the environment options.\n"
             << logofs_flush;
     #endif
-    
+
     return -1;
   }
 
@@ -8662,7 +8662,7 @@ int ParseEnvironmentOptions(const char *env, int force)
       // if the use of the shared memory extension should
       // not be enabled on the real X server.
       //
- 
+
       if (control -> ProxyMode == proxy_server)
       {
         PrintOptionIgnored("local", name, value);
@@ -9026,7 +9026,7 @@ int ParseCommandLineOptions(int argc, const char **argv)
             << "the command line options.\n"
             << logofs_flush;
     #endif
-    
+
     return -1;
   }
 
@@ -9320,7 +9320,7 @@ int ParseFileOptions(const char *file)
   //
 
   char *next = options;
-  
+
   while (*next != '\0')
   {
     if (isprint(*next) == 0)
@@ -10576,7 +10576,7 @@ char *GetRootPath()
 
       strcpy(rootDir, rootEnv);
     }
-        
+
     #ifdef TEST
     *logofs << "Loop: Assuming NX root directory '"
             << rootDir << "'.\n" << logofs_flush;
@@ -11427,7 +11427,7 @@ int SetLogs()
             S_IWGRP | S_IROTH | S_IWOTH);
 
   #endif
-                
+
   if (OpenLogFile(errorsFileName, logofs) < 0)
   {
     HandleCleanup();
@@ -12171,7 +12171,7 @@ int SetStorage()
     sprintf(cacheSizeName, "%dk", size / 1024);
   }
   else
-  { 
+  {
     sprintf(cacheSizeName, "%d", size);
   }
 
@@ -12805,7 +12805,7 @@ int SetLink()
   {
     strcpy(linkSpeedName, "lan");
   }
-  
+
   #ifdef TEST
   *logofs << "Loop: Link speed is " << linkSpeedName
           << ".\n" << logofs_flush;
@@ -13958,7 +13958,7 @@ int ReopenLogFile(char *name, ostream *&stream, int limit)
       {
         #ifdef WARNING
         *logofs << "Loop: WARNING! Can't get stats of file '"
-                << name  << "'. Error is " << EGET() 
+                << name  << "'. Error is " << EGET()
                 << " '" << ESTR() << "'.\n" << logofs_flush;
         #endif
 
@@ -14537,7 +14537,7 @@ int ValidateArg(const char *type, const char *name, const char *value)
   }
 
   return number;
-} 
+}
 
 int LowercaseArg(const char *type, const char *name, char *value)
 {
@@ -14662,7 +14662,7 @@ static void handleCheckSessionInLoop()
     *logofs << "Loop: Shutting down the NX transport.\n"
             << logofs_flush;
     #endif
- 
+
     HandleCleanup();
   }
   else if (proxy -> handlePing() < 0)
@@ -14705,7 +14705,7 @@ static void handleCheckSessionInLoop()
   // channel is gone. This is the normal shutdown
   // procedure in the case of an internal connect-
   // ion to the agent.
-  // 
+  //
 
   int cleanup = 0;
 
@@ -15666,7 +15666,7 @@ static void handleNegotiationInLoop(int &setFDs, fd_set &readSet,
   // Check if the user requested the end of
   // the session.
   //
-  
+
   if (CheckAbort() != 0)
   {
     HandleCleanup();
@@ -15848,7 +15848,7 @@ static void handleAlertInLoop()
       //
       // Use the display to which we are forwarding
       // the remote X connections.
-      // 
+      //
 
       char *display = displayHost;
 
@@ -16184,7 +16184,7 @@ static inline void handleAgentInLoop(int &resultFDs, int &errorFDs, int &setFDs,
   // Check if I/O is possible on the local
   // agent or the proxy descriptor.
   //
-  
+
   if (resultFDs >= 0)
   {
     //
@@ -16255,7 +16255,7 @@ static inline void handleAgentLateInLoop(int &resultFDs, int &errorFDs, int &set
   // descriptors may have become readable or writ-
   // able in the meanwhile.
   //
-  
+
   if (resultFDs >= 0)
   {
     //
