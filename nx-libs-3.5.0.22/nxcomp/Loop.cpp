@@ -4851,12 +4851,14 @@ void HandleCleanupForReconnect()
   DisableSignals();
   CleanupListeners();
   CleanupSockets();
-  CleanupGlobal();
-  RestoreSignals();
-  CleanupLocal();
   CleanupKeeper();
   CleanupStreams();
+  CleanupLocal();
+  CleanupGlobal();
+  RestoreSignals();
   ServerCache::lastInitReply.set(0,NULL);
+  ServerCache::lastKeymap.set(0,NULL);
+  ServerCache::getKeyboardMappingLastMap.set(0,NULL);
 }
 void HandleCleanup(int code)
 {
