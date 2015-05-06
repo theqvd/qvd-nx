@@ -1,0 +1,275 @@
+diff --git a/nxcomp/CHANGELOG b/nxcomp/CHANGELOG
+index b7ef0d9..9cc7b1f 100644
+--- a/nxcomp/CHANGELOG
++++ b/nxcomp/CHANGELOG
+@@ -1,5 +1,10 @@
+ ChangeLog:
+ 
++nxcomp-3.5.0-28 16/09/2014 -- Nito at Qindel
++
++- Add versioning. Update of NX.h and Version.c. Added LocalMaintenancePatch in
++  Control.h
++
+ nxcomp-3.5.0-2
+ 
+ - Fixed TR11H02398. Solved a race condition when creating channels.
+diff --git a/nxcomp/Control.cpp b/nxcomp/Control.cpp
+index ce99567..0626542 100644
+--- a/nxcomp/Control.cpp
++++ b/nxcomp/Control.cpp
+@@ -15,6 +15,7 @@
+ /*                                                                        */
+ /**************************************************************************/
+ 
++#include "NX.h"
+ #include "NXpack.h"
+ 
+ #include "Control.h"
+@@ -594,44 +595,17 @@ Control::Control()
+   RemoteVersionMajor = -1;
+   RemoteVersionMinor = -1;
+   RemoteVersionPatch = -1;
++  RemoteVersionMaintenancePatch = -1;
+ 
+   CompatVersionMajor = -1;
+   CompatVersionMinor = -1;
+   CompatVersionPatch = -1;
++  CompatVersionMaintenancePatch = -1;
+ 
+-  char version[32];
+-
+-  strcpy(version, VERSION);
+-
+-  char *value;
+-
+-  value = strtok(version, ".");
+-
+-  for (int i = 0; value != NULL && i < 3; i++)
+-  {
+-    switch (i)
+-    {
+-      case 0:
+-
+-        LocalVersionMajor = atoi(value);
+-
+-        break;
+-
+-      case 1:
+-
+-        LocalVersionMinor = atoi(value);
+-
+-        break;
+-
+-      case 2:
+-
+-        LocalVersionPatch = atoi(value);
+-
+-        break;
+-    }
+-
+-    value = strtok(NULL, ".");
+-  }
++  LocalVersionMajor = NXMajorVersion();
++  LocalVersionMinor = NXMinorVersion();
++  LocalVersionPatch = NXPatchVersion();
++  LocalVersionMaintenancePatch = NXMaintenancePatchVersion();
+ 
+   #ifdef TEST
+   *logofs << "Control: Major version is " << LocalVersionMajor
+diff --git a/nxcomp/Control.h b/nxcomp/Control.h
+index c214775..71f357c 100644
+--- a/nxcomp/Control.h
++++ b/nxcomp/Control.h
+@@ -299,17 +299,26 @@ class Control
+   // Version number of local and remote proxy.
+   //
+ 
++  /* 
++   * LocalVersionMaintenancePatch, RemoteVersionMaintenancePatch
++   * CompatVersionMaintenancePatch
++   *
++   * currently not used, for future compatibility checks
++   */
+   int LocalVersionMajor;
+   int LocalVersionMinor;
+   int LocalVersionPatch;
++  int LocalVersionMaintenancePatch;
+ 
+   int RemoteVersionMajor;
+   int RemoteVersionMinor;
+   int RemoteVersionPatch;
++  int RemoteVersionMaintenancePatch;
+ 
+   int CompatVersionMajor;
+   int CompatVersionMinor;
+   int CompatVersionPatch;
++  int CompatVersionMaintenancePatch;
+ 
+   //
+   // Which unpack methods are implemented in proxy?
+diff --git a/nxcomp/Loop.cpp b/nxcomp/Loop.cpp
+index 92b6fc2..5acc726 100644
+--- a/nxcomp/Loop.cpp
++++ b/nxcomp/Loop.cpp
+@@ -14189,7 +14189,8 @@ void PrintVersionInfo()
+   cerr << "NXPROXY - " << "Version "
+        << control -> LocalVersionMajor << "."
+        << control -> LocalVersionMinor << "."
+-       << control -> LocalVersionPatch;
++       << control -> LocalVersionPatch << "-"
++       << control -> LocalVersionMaintenancePatch;
+ 
+   cerr << endl;
+ }
+diff --git a/nxcomp/Makefile.in b/nxcomp/Makefile.in
+index 434118b..6aa18f3 100644
+--- a/nxcomp/Makefile.in
++++ b/nxcomp/Makefile.in
+@@ -100,7 +100,8 @@ MSRC   =
+ 
+ CSRC   = MD5.c					\
+ 	 Pack.c					\
+-         Vars.c
++	 Vars.c					\
++	 Version.c
+ 
+ CXXSRC = Loop.cpp 				\
+ 	 Children.cpp				\
+diff --git a/nxcomp/NX.h b/nxcomp/NX.h
+index d98af79..2dbf686 100644
+--- a/nxcomp/NX.h
++++ b/nxcomp/NX.h
+@@ -442,6 +442,12 @@ extern int NXTransParseEnvironment(const char *env, int force);
+ 
+ extern void NXTransCleanup(void) __attribute__((noreturn));
+ 
++extern const char* NXVersion();
++extern int NXMajorVersion();
++extern int NXMinorVersion();
++extern int NXPatchVersion();
++extern int NXMaintenancePatchVersion();
++
+ #ifdef __cplusplus
+ }
+ #endif
+diff --git a/nxcomp/VERSION b/nxcomp/VERSION
+index 1545d96..89b010a 100644
+--- a/nxcomp/VERSION
++++ b/nxcomp/VERSION
+@@ -1 +1 @@
+-3.5.0
++3.5.0-28
+diff --git a/nxcomp/Version.c b/nxcomp/Version.c
+new file mode 100644
+index 0000000..a16f9f3
+--- /dev/null
++++ b/nxcomp/Version.c
+@@ -0,0 +1,106 @@
++/**************************************************************************/
++/*                                                                        */
++/* Copyright (C) 2014 Qindel http://qindel.com and QVD http://theqvd.com  */
++/*                                                                        */
++/* This program is free software; you can redistribute it and/or modify   */
++/* it under the terms of the GNU General Public License as published by   */
++/* the Free Software Foundation; either version 3 of the License, or (at  */
++/* your option) any later version.                                        */
++/*                                                                        */
++/* This program is distributed in the hope that it will be useful, but    */
++/* WITHOUT ANY WARRANTY; without even the implied warranty of             */
++/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                   */
++/* See the GNU General Public License for more details.                   */
++/*                                                                        */
++/* You should have received a copy of the GNU General Public License      */
++/* along with this program; if not, see <http://www.gnu.org/licenses>.    */
++/*                                                                        */
++/* Additional permission under GNU GPL version 3 section 7                */
++/*                                                                        */
++/* If you modify this Program, or any covered work, by linking or         */
++/* combining it with [name of library] (or a modified version of that     */
++/* library), containing parts covered by the terms of [name of library's  */
++/* license], the licensors of this Program grant you additional           */
++/* permission to convey the resulting work. {Corresponding Source for a   */
++/* non-source form of such a combination shall include the source code    */
++/* for the parts of [name of library] used as well as that of the covered */
++/* work.}                                                                 */
++/*                                                                        */
++/*                                                                        */
++/**************************************************************************/
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include "NX.h"
++
++
++static int _NXVersionMajor = -1;
++static int _NXVersionMinor = -1;
++static int _NXVersionPatch = -1;
++static int _NXVersionMaintenancePatch = -1;
++
++
++const char* NXVersion() {
++  const char *version = VERSION;
++  return version;
++}
++
++void _parseNXVersion() {
++  char version[32];
++  int i;
++  strcpy(version, VERSION);
++
++  char *value;
++  /* Reset values to 0 if undefined */
++  _NXVersionMajor = _NXVersionMinor = _NXVersionPatch = _NXVersionMaintenancePatch = 0;
++
++
++#define NXVERSIONSEPARATOR ".-"
++  value = strtok(version, NXVERSIONSEPARATOR);
++
++  for (i = 0; value != NULL && i < 4; i++)
++  {
++    switch (i)
++    {
++      case 0:
++        _NXVersionMajor = atoi(value);
++        break;
++
++      case 1:
++        _NXVersionMinor = atoi(value);
++        break;
++
++      case 2:
++        _NXVersionPatch = atoi(value);
++        break;
++
++      case 3:
++        _NXVersionMaintenancePatch = atoi(value);
++        break;
++    }
++
++    value = strtok(NULL, NXVERSIONSEPARATOR);
++  }
++}
++
++int NXMajorVersion() {
++  if (_NXVersionMajor == -1)
++    _parseNXVersion();
++  return _NXVersionMajor;
++}
++int NXMinorVersion() {
++  if (_NXVersionMinor == -1)
++    _parseNXVersion();
++  return _NXVersionMinor;
++}
++int NXPatchVersion() {
++  if (_NXVersionPatch == -1)
++    _parseNXVersion();
++  return _NXVersionPatch;
++}
++int NXMaintenancePatchVersion() {
++  if (_NXVersionMaintenancePatch == -1)
++    _parseNXVersion();
++  return _NXVersionMaintenancePatch;
++}
+
+

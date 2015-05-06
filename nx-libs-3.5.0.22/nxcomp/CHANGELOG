@@ -1,5 +1,10 @@
 ChangeLog:
 
+nxcomp-3.5.0-28 16/09/2014 -- Nito at Qindel
+
+- Add versioning. Update of NX.h and Version.c. Added LocalMaintenancePatch in
+  Control.h
+
 nxcomp-3.5.0-2
 
 - Fixed TR11H02398. Solved a race condition when creating channels.
