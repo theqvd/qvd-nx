@@ -4,14 +4,14 @@ index b7ef0d9..9cc7b1f 100644
 +++ b/nxcomp/CHANGELOG
 @@ -1,5 +1,10 @@
  ChangeLog:
- 
+
 +nxcomp-3.5.0-28 16/09/2014 -- Nito at Qindel
 +
 +- Add versioning. Update of NX.h and Version.c. Added LocalMaintenancePatch in
 +  Control.h
 +
  nxcomp-3.5.0-2
- 
+
  - Fixed TR11H02398. Solved a race condition when creating channels.
 diff --git a/nxcomp/Control.cpp b/nxcomp/Control.cpp
 index ce99567..0626542 100644
@@ -20,22 +20,22 @@ index ce99567..0626542 100644
 @@ -15,6 +15,7 @@
  /*                                                                        */
  /**************************************************************************/
- 
+
 +#include "NX.h"
  #include "NXpack.h"
- 
+
  #include "Control.h"
 @@ -594,44 +595,17 @@ Control::Control()
    RemoteVersionMajor = -1;
    RemoteVersionMinor = -1;
    RemoteVersionPatch = -1;
 +  RemoteVersionMaintenancePatch = -1;
- 
+
    CompatVersionMajor = -1;
    CompatVersionMinor = -1;
    CompatVersionPatch = -1;
 +  CompatVersionMaintenancePatch = -1;
- 
+
 -  char version[32];
 -
 -  strcpy(version, VERSION);
@@ -73,7 +73,7 @@ index ce99567..0626542 100644
 +  LocalVersionMinor = NXMinorVersion();
 +  LocalVersionPatch = NXPatchVersion();
 +  LocalVersionMaintenancePatch = NXMaintenancePatchVersion();
- 
+
    #ifdef TEST
    *logofs << "Control: Major version is " << LocalVersionMajor
 diff --git a/nxcomp/Control.h b/nxcomp/Control.h
@@ -83,8 +83,8 @@ index c214775..71f357c 100644
 @@ -299,17 +299,26 @@ class Control
    // Version number of local and remote proxy.
    //
- 
-+  /* 
+
++  /*
 +   * LocalVersionMaintenancePatch, RemoteVersionMaintenancePatch
 +   * CompatVersionMaintenancePatch
 +   *
@@ -94,17 +94,17 @@ index c214775..71f357c 100644
    int LocalVersionMinor;
    int LocalVersionPatch;
 +  int LocalVersionMaintenancePatch;
- 
+
    int RemoteVersionMajor;
    int RemoteVersionMinor;
    int RemoteVersionPatch;
 +  int RemoteVersionMaintenancePatch;
- 
+
    int CompatVersionMajor;
    int CompatVersionMinor;
    int CompatVersionPatch;
 +  int CompatVersionMaintenancePatch;
- 
+
    //
    // Which unpack methods are implemented in proxy?
 diff --git a/nxcomp/Loop.cpp b/nxcomp/Loop.cpp
@@ -118,7 +118,7 @@ index 92b6fc2..5acc726 100644
 -       << control -> LocalVersionPatch;
 +       << control -> LocalVersionPatch << "-"
 +       << control -> LocalVersionMaintenancePatch;
- 
+
    cerr << endl;
  }
 diff --git a/nxcomp/Makefile.in b/nxcomp/Makefile.in
@@ -126,13 +126,13 @@ index 434118b..6aa18f3 100644
 --- a/nxcomp/Makefile.in
 +++ b/nxcomp/Makefile.in
 @@ -100,7 +100,8 @@ MSRC   =
- 
+
  CSRC   = MD5.c					\
  	 Pack.c					\
 -         Vars.c
 +	 Vars.c					\
 +	 Version.c
- 
+
  CXXSRC = Loop.cpp 				\
  	 Children.cpp				\
 diff --git a/nxcomp/NX.h b/nxcomp/NX.h
@@ -140,9 +140,9 @@ index d98af79..2dbf686 100644
 --- a/nxcomp/NX.h
 +++ b/nxcomp/NX.h
 @@ -442,6 +442,12 @@ extern int NXTransParseEnvironment(const char *env, int force);
- 
+
  extern void NXTransCleanup(void) __attribute__((noreturn));
- 
+
 +extern const char* NXVersion();
 +extern int NXMajorVersion();
 +extern int NXMinorVersion();
@@ -156,9 +156,9 @@ diff --git a/nxcomp/VERSION b/nxcomp/VERSION
 index 1545d96..89b010a 100644
 --- a/nxcomp/VERSION
 +++ b/nxcomp/VERSION
-@@ -1 +1 @@
+@@ -1,1 +1,1 @@
 -3.5.0
-+3.5.0-28
++3.5.0.22
 diff --git a/nxcomp/Version.c b/nxcomp/Version.c
 new file mode 100644
 index 0000000..a16f9f3
@@ -271,5 +271,3 @@ index 0000000..a16f9f3
 +    _parseNXVersion();
 +  return _NXVersionMaintenancePatch;
 +}
-
-
