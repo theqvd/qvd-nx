@@ -32,7 +32,7 @@
 #include "NXlocalevents.h"
 
 /* TODO remove */
-#define DEBUG
+// #define DEBUG
 
 /* TODO create a list of qvdRedirectEmbedder */
 Window qvdRedirectEmbedder = -1;
