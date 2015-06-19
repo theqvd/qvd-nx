@@ -109,6 +109,8 @@ Description: NX agent
 
 Package: qvd-nxproxy
 Architecture: any
+Breaks: nxproxy,
+Replaces: nxproxy,
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
