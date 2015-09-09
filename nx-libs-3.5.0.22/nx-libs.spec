@@ -10,6 +10,18 @@ License:        GPLv2+
 URL:            http://theqvd.com
 Source0:        %{name}-%{version}.tar.gz
 
+%if 0%{?rhel} == 7
+BuildRequires:  autoconf
+BuildRequires:  expat-devel
+BuildRequires:  fontconfig-devel
+BuildRequires:  freetype-devel
+BuildRequires:  libfontenc-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  libpng-devel
+BuildRequires:  libxml2-devel
+BuildRequires:  zlib-devel
+
+%else
 BuildRequires:  autoconf
 BuildRequires:  libexpat-devel
 BuildRequires:  fontconfig-devel
@@ -19,6 +31,7 @@ BuildRequires:  libjpeg-devel
 BuildRequires:  libpng-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  zlib-devel
+%endif
 
 Obsoletes:      nx < 3.5.0-19
 Provides:       nx = %{version}-%{release}
