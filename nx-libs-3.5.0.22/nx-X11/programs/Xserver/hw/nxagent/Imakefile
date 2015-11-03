@@ -67,7 +67,6 @@ SRCS =  NXwindow.c \
 	Pixels.c \
 	stubs.c \
 	miinitext.c \
-	NXlocalevents.c \
 	$(SRCS1)
 
 OBJS =  NXwindow.o \
@@ -130,7 +129,6 @@ OBJS =  NXwindow.o \
 	Pixels.o \
 	stubs.o \
 	miinitext.o \
-	NXlocalevents.o \
 	$(OBJS1)
 
 VFBINCLUDES = -I../../fb -I../../mfb -I../../render

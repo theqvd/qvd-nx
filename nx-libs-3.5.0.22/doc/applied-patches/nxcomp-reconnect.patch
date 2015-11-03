@@ -1,0 +1,76 @@
+diff --git a/nx-libs-3.5.0.22/nxcomp/Loop.cpp b/nx-libs-3.5.0.22/nxcomp/Loop.cpp
+index 8c19467..16b757a 100644
+--- a/nx-libs-3.5.0.22/nxcomp/Loop.cpp
++++ b/nx-libs-3.5.0.22/nxcomp/Loop.cpp
+@@ -1311,6 +1311,11 @@ void NXTransCleanup()
+   HandleCleanup();
+ }
+
++void NXTransCleanupForReconnect()
++{
++  HandleCleanupForReconnect();
++}
++
+ //
+ // Check the parameters for subsequent
+ // initialization of the NX transport.
+@@ -4835,6 +4840,28 @@ int StartKeeper()
+   return 1;
+ }
+
++void HandleCleanupForReconnect()
++{
++  #ifdef TEST
++  *logofs << "Loop: Going to clean up system resources for Reconnect "
++          << "in process '" << getpid() << "'.\n"
++          << logofs_flush;
++  #endif
++  handleTerminatedInLoop();
++  DisableSignals();
++  if (control)
++    CleanupChildren();
++  CleanupListeners();
++  CleanupSockets();
++  CleanupKeeper();
++  CleanupStreams();
++  CleanupLocal();
++  CleanupGlobal();
++  RestoreSignals();
++  ServerCache::lastInitReply.set(0,NULL);
++  ServerCache::lastKeymap.set(0,NULL);
++  ServerCache::getKeyboardMappingLastMap.set(0,NULL);
++}
+ void HandleCleanup(int code)
+ {
+   #ifdef TEST
+diff --git a/nx-libs-3.5.0.22/nxcomp/Misc.h b/nx-libs-3.5.0.22/nxcomp/Misc.h
+index 21a5030..0cc3969 100644
+--- a/nx-libs-3.5.0.22/nxcomp/Misc.h
++++ b/nx-libs-3.5.0.22/nxcomp/Misc.h
+@@ -140,6 +140,7 @@ void HandleShutdown() __attribute__((noreturn));
+ extern "C"
+ {
+   void HandleCleanup(int code = 0) __attribute__((noreturn));
++  void HandleCleanupForReconnect();
+ }
+
+ //
+diff --git a/nx-libs-3.5.0.22/nxcomp/NX.h b/nx-libs-3.5.0.22/nxcomp/NX.h
+index 2dbf686..0e4734e 100644
+--- a/nx-libs-3.5.0.22/nxcomp/NX.h
++++ b/nx-libs-3.5.0.22/nxcomp/NX.h
+@@ -442,6 +442,14 @@ extern int NXTransParseEnvironment(const char *env, int force);
+
+ extern void NXTransCleanup(void) __attribute__((noreturn));
+
++/*
++ * Cleans up the global and local state
++ * (the same way as NXTransCleanup does)
++ * but does not exit the process
++ * Needed for IOS platform
++ */
++extern void NXTransCleanupForReconnect(void);
++
+ extern const char* NXVersion();
+ extern int NXMajorVersion();
+ extern int NXMinorVersion();
